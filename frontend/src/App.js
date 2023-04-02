@@ -1,10 +1,16 @@
 import "./App.css";
+import NavigationBar from "./components/layout/NavigationBar";
 
 function App() {
   return (
-    <div className="App">
-      <h1>eBlej</h1>
-    </div>
+    <>
+      <div
+        style={{ display: "flex", justifyContent: "center" }}
+        className="NavigationBar"
+      >
+        <NavigationBar></NavigationBar>
+      </div>
+    </>
   );
 }
 
