@@ -1,23 +1,49 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Cameras from "../categories/Cameras";
+import Foods from "../categories/Foods";
+import Accessories from "../categories/Accessories";
+import Electronics from "../categories/Electronics";
+import Headphones from "../categories/Headphones";
+import Laptops from "../categories/Laptops";
 const NavigationBar = () => {
   return (
     <>
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Nav className="me-auto">
-            <Nav.Link href="#">Electronics</Nav.Link>
-            <Nav.Link href="#">Laptops</Nav.Link>
-            <Nav.Link href="#">Headphones</Nav.Link>
-            <Nav.Link href="#">Accessories</Nav.Link>
-            <Nav.Link href="#pricing">Cameras</Nav.Link>
-            <Nav.Link href="#pricing">Foods</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Router>
+        <Navbar bg="light" variant="light">
+          <Container className="justify-content-center sticky-top">
+            <Nav className="">
+              <Link to="/electronics" className="nav-link">
+                Electronics
+              </Link>
+              <Link to="/laptops" className="nav-link">
+                Laptops
+              </Link>
+              <Link to="/accessories" className="nav-link">
+                Accessories
+              </Link>
+              <Link to="/cameras" className="nav-link">
+                Cameras
+              </Link>
+              <Link to="/foods" className="nav-link">
+                Foods
+              </Link>
+              <Link to="/headphones" className="nav-link">
+                Headphones
+              </Link>
+            </Nav>
+          </Container>
+        </Navbar>
+        <Routes>
+          <Route path="/electronics" element={<Electronics />} />
+          <Route path="/laptops" element={<Laptops />} />
+          <Route path="/accessories" element={<Accessories />} />
+          <Route path="/cameras" element={<Cameras />} />
+          <Route path="/foods" element={<Foods />} />
+          <Route path="/headphones" element={<Headphones />} />
+        </Routes>
+      </Router>
     </>
   );
 };
