@@ -38,6 +38,14 @@ class APIFeatures {
     this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }
+
+  pagination(resPerPage) {
+    const currentPage = Number(this.queryStr.page) || 1; // by default = 1
+    const skip = resPerPage * (currentPage - 1); // 10 * (4-1) = 30 => 31-40 will be shown
+    // console.log(skip);
+    this.query = this.query.limit(resPerPage).skip(skip);
+    return this;
+  }
 }
 
 module.exports = APIFeatures;
