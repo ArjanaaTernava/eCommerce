@@ -13,7 +13,7 @@ nav {
   padding: 1rem 1rem;
 }
 
-#search_btn {
+#search-btn {
   background-color: #febd69;
 }
 
@@ -26,7 +26,7 @@ nav {
   height: 2.4rem;
   padding: 1rem;
 }
-#login_btn,
+#login-btn,
 #view_btn {
   background-color: #febd69;
   padding: 0.4rem 1.8rem;
@@ -37,11 +37,16 @@ nav {
   color: white;
 }
 
-#cart_count {
+#cart-count {
   background-color: #febd69;
   padding: 0.2rem 0.5rem;
   border-radius: 0.2rem;
   color: black;
   font-weight: bold;
   font-size: 0.9rem;
+}
+
+#logo{
+  max-width: 100px;
+  height: auto;
 }
