@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import "../../App.css";
 
 const Header = () => {
   return (
@@ -6,7 +7,7 @@ const Header = () => {
       <nav className="navbar row">
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
-            <img src="/images/logo.jpg" />
+            <img id="logo" src="/images/logo.jpg" />
           </div>
         </div>
 
