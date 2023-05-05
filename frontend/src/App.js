@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import "./App.css";
 import NavigationBar from "./components/layout/NavigationBar";
 import Header from "./components/layout/Header";
@@ -6,14 +8,18 @@ import Home from "./components/Home";
 
 function App() {
   return (
-    <>
-      <div className="NavigationBar">
-        <Header />
-        <NavigationBar></NavigationBar>
-        <Home />
-        <Footer />
-      </div>
-    </>
+    <Router>
+      <>
+        <div className="NavigationBar">
+          <Header />
+          <div className="container container-fluid">
+            <NavigationBar></NavigationBar>
+            <Route path="/" component={Home} exact />
+          </div>
+          <Footer />
+        </div>
+      </>
+    </Router>
   );
 }
 
