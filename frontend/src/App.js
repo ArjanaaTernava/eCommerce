@@ -15,10 +15,8 @@ function App() {
           <Header />
           <div className="container container-fluid">
             <NavigationBar></NavigationBar>
-            <Routes>
-              <Route path="/" component={Home} exact />
-              
-            </Routes>
+            <Route path="/" component={Home} exact />
+            <Route path="/product/:id" component={ProductDetails} exact />
           </div>
           <Footer />
         </div>
