@@ -5,6 +5,7 @@ import NavigationBar from "./components/layout/NavigationBar";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
+import ProductDetails from "./components/product/ProductDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <NavigationBar></NavigationBar>
             <Routes>
               <Route path="/" component={Home} exact />
+              
             </Routes>
           </div>
           <Footer />
