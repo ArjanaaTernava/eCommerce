@@ -2,11 +2,12 @@ import React, { Fragment, useEffect } from "react";
 
 import MetaData from "./layout/MetaData";
 import Product from "./product/Product";
+import Loader from "./layout/Loader";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../actions/productActions";
 
-function Home() {
+const Home = () => {
   const dispatch = useDispatch();
 
   const { loading, products, error, productsCount } = useSelector(
@@ -21,7 +22,7 @@ function Home() {
     <Fragment>
      {/* Ternary operator */}
       {loading ? (
-        <h1>Loading...</h1>
+       <Loader/>
       ) : (
         <Fragment>
           <MetaData title={"Shop smart, shop online"} />
