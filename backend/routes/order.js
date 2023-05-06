@@ -22,7 +22,7 @@ router
   .get(isAuthenticatedUser, authorizeRoles("admin"), allOrders);
 router
   .route("/admin/order/:id")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), updateOrder);
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder);
 
 router
   .route("/admin/order/:id")
