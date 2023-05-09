@@ -18,6 +18,7 @@ const Home = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]); // Minimum price = 1, Maximum = 1k
   const [category, setCategory] = useState(""); //by default category is nothing
+  const [rating, setRating] = useState(0); //by default rating is 0
 
   const categories = [
     "Electronics",
@@ -51,8 +52,8 @@ const Home = ({ match }) => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProducts(keyword, currentPage, price, category));
-  }, [alert, dispatch, error, keyword, currentPage, price, category]);
+    dispatch(getProducts(keyword, currentPage, price, category, rating));
+  }, [alert, dispatch, error, keyword, currentPage, price, category, rating]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
@@ -113,6 +114,34 @@ const Home = ({ match }) => {
                               onClick={() => setCategory(category)}
                             >
                               {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <hr className="my-3" />
+
+                      <div className="mt-5">
+                        <h4 className="mb-3">Ratings</h4>
+
+                        <ul className="pl-0">
+                          {[5, 4, 3, 2, 1].map((star) => (
+                            <li
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              key={star}
+                              onClick={() => setRating(star)}
+                            >
+                              <div className="rating-outer">
+                                <div
+                                  className="rating-inner"
+                                  style={{
+                                    width: `${star * 20}%`, // Filling the stars for rating
+                                  }}
+                                ></div>
+                              </div>
                             </li>
                           ))}
                         </ul>
