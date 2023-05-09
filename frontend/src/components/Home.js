@@ -36,9 +36,14 @@ const Home = ({ match }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, products, error, productsCount, resPerPage } = useSelector(
-    (state) => state.products
-  );
+  const {
+    loading,
+    products,
+    error,
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
+  } = useSelector((state) => state.products);
 
   const keyword = match.params.keyword;
 
@@ -52,7 +57,10 @@ const Home = ({ match }) => {
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
   }
-
+  let count = productsCount;
+  if (keyword) {
+    count = filteredProductsCount;
+  }
   return (
     <Fragment>
       {/* Ternary operator */}
@@ -128,7 +136,7 @@ const Home = ({ match }) => {
               )}
             </div>
           </section>
-          {resPerPage <= productsCount && (
+          {resPerPage <= count && (
             <div className="d-flex justify-content-center mt-6">
               <Pagination
                 activePage={currentPage}
