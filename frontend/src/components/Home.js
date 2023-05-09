@@ -15,10 +15,26 @@ const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
 const [currentPage, setCurrentPage] = useState(1);
+const [price, setPrice] = useState([1, 1000]); // Minimum price = 1, Maximum = 1k
+const [category, setCategory] = useState(""); //by default category is nothing
+const [rating, setRating] = useState(0); //by default rating is 0
 
+const categories = [
+  "Electronics",
+  "Cameras",
+  "Laptops",
+  "Accessories",
+  "Headphones",
+  "Food",
+  "Books",
+  "Clothes/Shoes",
+  "Beauty/Health",
+  "Sports",
+  "Outdoor",
+  "Home",
+];
 const alert = useAlert();
 const dispatch = useDispatch();
-
 const {
   loading,
   products,
