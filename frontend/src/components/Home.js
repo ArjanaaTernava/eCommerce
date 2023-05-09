@@ -17,7 +17,22 @@ const Range = createSliderWithTooltip(Slider.Range);
 const Home = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]); // Minimum price = 1, Maximum = 1k
+  const [category, setCategory] = useState(""); //by default category is nothing
 
+  const categories = [
+    "Electronics",
+    "Cameras",
+    "Laptops",
+    "Accessories",
+    "Headphones",
+    "Food",
+    "Books",
+    "Clothes/Shoes",
+    "Beauty/Health",
+    "Sports",
+    "Outdoor",
+    "Home",
+  ];
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -31,8 +46,8 @@ const Home = ({ match }) => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProducts(keyword, currentPage, price));
-  }, [alert, dispatch, error, keyword, currentPage, price]);
+    dispatch(getProducts(keyword, currentPage, price, category));
+  }, [alert, dispatch, error, keyword, currentPage, price, category]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
@@ -73,6 +88,27 @@ const Home = ({ match }) => {
                           setPrice(value);
                         }}
                       />
+
+                      <hr className="my-5" />
+
+                      <div className="mt-5">
+                        <h4 className="mb-3">Categories</h4>
+
+                        <ul className="pl-0">
+                          {categories.map((category) => (
+                            <li
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              key={category}
+                              onClick={() => setCategory(category)}
+                            >
+                              {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
@@ -115,6 +151,5 @@ const Home = ({ match }) => {
 };
 
 //test
-
 
 export default Home;
