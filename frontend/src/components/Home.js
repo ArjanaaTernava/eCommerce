@@ -158,6 +158,4 @@ const Home = ({ match }) => {
   );
 };
 
-//test
-
 export default Home;
