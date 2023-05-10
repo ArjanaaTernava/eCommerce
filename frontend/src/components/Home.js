@@ -14,6 +14,8 @@ import { useAlert } from "react-alert";
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
+const Home = ({ match }) => {
+
 const [currentPage, setCurrentPage] = useState(1);
 const [price, setPrice] = useState([1, 1000]); // Minimum price = 1, Maximum = 1k
 const [category, setCategory] = useState(""); //by default category is nothing
@@ -181,6 +183,6 @@ return (
       </Fragment>
     )}
   </Fragment>
-);
+);}
 
 export default Home;
