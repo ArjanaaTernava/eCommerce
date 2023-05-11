@@ -12,10 +12,12 @@ import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import UpdateProfile from "./components/user/UpdateProfile";
 
+
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/forgotPassword";
+import NewPassword from "./components/user/NewPassword";
 
 import store from "./store";
 
@@ -39,6 +41,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/me" component={Profile} exact />
               <Route path="/password/forgot" component={ForgotPassword} exact />
+              <Route path="/password/reset/:token" component={NewPassword} exact />
               <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
               <ProtectedRoute path="/password/update" component={UpdatePassword} exact />
 

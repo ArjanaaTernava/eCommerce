@@ -5,7 +5,7 @@ import MetaData from "../layout/MetaData";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword, clearErrors } from "../../actions/userActions";
+
 import { forgotPassword, clearErrors } from "../../constants/userConstants";
 
 
