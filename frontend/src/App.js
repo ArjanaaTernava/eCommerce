@@ -7,37 +7,37 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
-import Login from './components/user/Login'
+import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import Profile from "./components/user/Profile";
 
-import {loadUser } from './actions/userActions'
-import store from './store'
-
+import { loadUser } from "./actions/userActions";
+import store from "./store";
 
 function App() {
-
   useEffect(() => {
-    store.dispatch(loadUser())
-  },[])
+    store.dispatch(loadUser());
+  }, []);
 
   return (
     <>
-    <NavigationBar/>
-    <Router>
+      <NavigationBar />
+      <Router>
         <div className="NavigationBar">
           <Header />
           <div className="container container-fluid">
             <Routes>
-            <Route path="/" component={Home} exact />
-            <Route path="/search/:keyword" component={Home} />
-            <Route path="/product/:id" component={ProductDetails} exact />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
+              <Route path="/" component={Home} exact />
+              <Route path="/search/:keyword" component={Home} />
+              <Route path="/product/:id" component={ProductDetails} exact />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route path="/me" component={Profile} exact />
             </Routes>
           </div>
           <Footer />
         </div>
-    </Router>
+      </Router>
     </>
   );
 }
