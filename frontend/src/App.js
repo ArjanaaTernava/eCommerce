@@ -11,6 +11,7 @@ import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 
+import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/me" component={Profile} exact />
+              <ProtectedRoute path="/me" component={Profile} exact />
             </Routes>
           </div>
           <Footer />
