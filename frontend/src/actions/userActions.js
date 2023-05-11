@@ -12,7 +12,9 @@ import {
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
-  UPDATE_PROFILE_RESET,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   CLEAR_ERRORS,
@@ -137,3 +139,30 @@ export const logout = () => async (dispatch) => {
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
+
+// Update password
+export const updatePassword = (passwords) => async (dispatch) => {
+  try {
+
+      dispatch({ type: UPDATE_PASSWORD_REQUEST })
+
+      const config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+
+      const { data } = await axios.put('/api/v1/password/update', passwords, config)
+
+      dispatch({
+          type: UPDATE_PASSWORD_SUCCESS,
+          payload: data.success
+      })
+
+  } catch (error) {
+      dispatch({
+          type: UPDATE_PASSWORD_FAIL,
+          payload: error.response.data.message
+      })
+  }
+}
