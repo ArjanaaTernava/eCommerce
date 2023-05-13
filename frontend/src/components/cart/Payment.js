@@ -36,6 +36,34 @@ const Payment = ({ history }) => {
 
   useEffect(() => {}, []);
 
+  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+
+  const paymentData = {
+    amount: Math.round(orderInfo.totalPrice * 100)//pass the amount in cents
+}
+const submitHandler = async (e) => {
+  e.preventDefault();
+  document.querySelector('#pay_btn').disabled = true; //cant click multiple times
+
+  let res;
+  try {
+//post request
+      const config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+
+      res = await axios.post('/api/v1/payment/process', paymentData, config)
+
+
+  } catch (error) {
+      document.querySelector('#pay_btn').disabled = false;
+      alert.error(error.response.data.message)
+  }
+}
+
+
   return (
     <Fragment>
       <MetaData title={"Payment"} />
@@ -46,7 +74,7 @@ const Payment = ({ history }) => {
         <div class="col-10 col-lg-5">
           <form class="shadow-lg">
             <h1 class="mb-4">Card Info</h1>
-            <div class="form-group">
+            <div class="form-group" onSubmit={submitHandler}>
               <label htmlFor="card_num_field">Card Number</label>
               {/* Will automatically validate */}
               <CardNumberElement
