@@ -30,6 +30,7 @@
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1",
     "react-redux": "^8.0.5",
+    "stripe": "^12.5.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {
