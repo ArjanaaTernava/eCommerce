@@ -73,6 +73,20 @@ const submitHandler = async (e) => {
           }
       });
 
+      if (result.error) {
+          alert.error(result.error.message);
+          document.querySelector('#pay_btn').disabled = false;
+      } else {
+
+          // The payment is processed or not
+          if (result.paymentIntent.status === 'succeeded') {
+            //TODO LATER FOR NEW ORDER  
+            history.push('/success')
+          } else {
+              alert.error('There is some issue while payment processing')
+          }
+      }
+ 
 
   } catch (error) {
       document.querySelector('#pay_btn').disabled = false;
@@ -87,43 +101,43 @@ const submitHandler = async (e) => {
 
       <CheckoutSteps shipping confirmOrder payment />
 
-      <div class="row wrapper">
-        <div class="col-10 col-lg-5">
-          <form class="shadow-lg">
-            <h1 class="mb-4">Card Info</h1>
-            <div class="form-group" onSubmit={submitHandler}>
+      <div className="row wrapper">
+        <div className="col-10 col-lg-5">
+          <form className="shadow-lg">
+            <h1 className="mb-4">Card Info</h1>
+            <div className="form-group" onSubmit={submitHandler}>
               <label htmlFor="card_num_field">Card Number</label>
               {/* Will automatically validate */}
               <CardNumberElement
                 type="text"
                 id="card_num_field"
-                class="form-control"
+                className="form-control"
                 options={options}
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label htmlFor="card_exp_field">Card Expiry</label>
               <CardExpiryElement
                 type="text"
                 id="card_exp_field"
-                class="form-control"
+                className="form-control"
                 options={options}
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label htmlFor="card_cvc_field">Card CVC</label>
               <CardCvcElement
                 type="text"
                 id="card_cvc_field"
-                class="form-control"
+                className="form-control"
                 options={options}
               />
             </div>
 
-            <button id="pay_btn" type="submit" class="btn btn-block py-3">
-              Pay
+            <button id="pay_btn" type="submit" className="btn btn-block py-3">
+              Pay {` - ${orderInfo && orderInfo.totalPrice}`}
             </button>
           </form>
         </div>
