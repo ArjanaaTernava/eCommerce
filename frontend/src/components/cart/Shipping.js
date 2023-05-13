@@ -1,4 +1,4 @@
-import React, { Fragment, useLayoutEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { countries } from "countries-list";
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
@@ -23,7 +23,7 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     dispatch(saveShippingInfo({ address, city, phoneNo, postalCode, country }));
-    history.pushState("/confirm");
+    history.pushState("/order/confirm");
   };
 
   return (
