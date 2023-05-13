@@ -16,6 +16,7 @@ import OrderSuccess from "./components/cart/OrderSuccess";
 
 //Order imports
 import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
 
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
@@ -91,6 +92,7 @@ function App() {
                 exact
               />
               <ProtectedRoute path="/orders/me" component={ListOrders} exact />
+              <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
               <ProtectedRoute
                 path="/me/update"
                 component={UpdateProfile}
