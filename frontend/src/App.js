@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import NavigationBar from "./components/layout/NavigationBar";
 import Header from "./components/layout/Header";
@@ -24,10 +24,21 @@ import ForgotPassword from "./components/user/forgotPassword";
 import NewPassword from "./components/user/NewPassword";
 
 import store from "./store";
+import axios from "axios";
 
 function App() {
+
+  const [stripeApiKey, setStripeApiKey] = useState('');
+
   useEffect(() => {
     store.dispatch(loadUser());
+
+    async function getStripeApiKey(){
+      const {data} = await axios.get('/api/v1/stripeapi');
+      setStripeApiKey(data.stripeApiKey)
+    }
+
+    getStripeApiKey();
   }, []);
 
   return (
