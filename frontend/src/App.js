@@ -11,6 +11,7 @@ import ProductDetails from "./components/product/ProductDetails";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
+import Payment from "./components/cart/Payment";
 
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
@@ -26,16 +27,19 @@ import NewPassword from "./components/user/NewPassword";
 import store from "./store";
 import axios from "axios";
 
-function App() {
+// Payment
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-  const [stripeApiKey, setStripeApiKey] = useState('');
+function App() {
+  const [stripeApiKey, setStripeApiKey] = useState("");
 
   useEffect(() => {
     store.dispatch(loadUser());
 
-    async function getStripeApiKey(){
-      const {data} = await axios.get('/api/v1/stripeapi');
-      setStripeApiKey(data.stripeApiKey)
+    async function getStripeApiKey() {
+      const { data } = await axios.get("/api/v1/stripeapi");
+      setStripeApiKey(data.stripeApiKey);
     }
 
     getStripeApiKey();
@@ -56,6 +60,11 @@ function App() {
               <Route path="/cart" component={Cart} exact />
               <ProtectedRoute path="/shipping" component={Shipping} />
               <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
+              {stripeApiKey && (
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <ProtectedRoute path="/payment" component={Payment} />
+                </Elements>
+              )}
 
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />

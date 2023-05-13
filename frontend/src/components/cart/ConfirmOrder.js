@@ -28,7 +28,7 @@ const ConfirmOrder = ({ history }) => {
     };
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data)); //once we close the browser the data will be deleted
-    history.push("/");
+    history.push("/payment");
   };
 
   return (
