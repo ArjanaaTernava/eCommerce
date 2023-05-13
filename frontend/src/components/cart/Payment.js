@@ -55,6 +55,23 @@ const submitHandler = async (e) => {
       }
 
       res = await axios.post('/api/v1/payment/process', paymentData, config)
+      const clientSecret = res.data.client_secret;
+
+      console.log(clientSecret);
+
+      if (!stripe || !elements) {
+          return;
+      }
+
+      const result = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+              card: elements.getElement(CardNumberElement),
+              billing_details: {
+                  name: user.name,
+                  email: user.email
+              }
+          }
+      });
 
 
   } catch (error) {
