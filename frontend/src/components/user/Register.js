@@ -65,7 +65,7 @@ const Register = ({ history }) => {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
-
+ 
   return (
     <Fragment>
       <MetaData title={"Register User"} />
