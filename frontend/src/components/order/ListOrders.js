@@ -87,7 +87,7 @@ const ListOrders = () => {
         <Loader />
       ) : (
         <MDBDataTable
-          data={setOrders()}
+        data={setOrders()}
           className="px-3"
           bordered
           striped
