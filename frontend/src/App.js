@@ -8,6 +8,8 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 
+
+// Cart imports
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
@@ -18,16 +20,20 @@ import OrderSuccess from "./components/cart/OrderSuccess";
 import ListOrders from "./components/order/ListOrders";
 import OrderDetails from "./components/order/OrderDetails";
 
+// Auth or User imports
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import UpdateProfile from "./components/user/UpdateProfile";
-
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/forgotPassword";
 import NewPassword from "./components/user/NewPassword";
+
+// Admin imports
+import Dashboard from "./components/admin/Dashboard";
+
 
 import store from "./store";
 import axios from "axios";
@@ -100,6 +106,7 @@ function App() {
               />
             </Routes>
           </div>
+          <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />       
           <Footer />
         </div>
       </Router>
