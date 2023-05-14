@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
+import ListReviews from "../review/ListReviews";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -288,6 +289,9 @@ const ProductDetails = ({ match }) => {
               </div>
             </div>
           </div>
+          {product.reviews && product.reviews.length > 0 && (
+            <ListReviews reviews={product.reviews} />
+          )}
         </Fragment>
       )}
     </Fragment>
