@@ -91,7 +91,6 @@ export const deleteProduct = (id) => async (dispatch) => {
       type: DELETE_PRODUCT_SUCCESS,
       payload: data.success,
     });
-    
   } catch (error) {
     dispatch({
       type: DELETE_PRODUCT_FAIL,
@@ -102,7 +101,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 // Update Product (Admin)
 
-export const udpateProduct = (id, productData) => async (dispatch) => {
+export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
