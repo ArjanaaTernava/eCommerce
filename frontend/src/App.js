@@ -8,7 +8,6 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 
-
 // Cart imports
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
@@ -33,7 +32,7 @@ import NewPassword from "./components/user/NewPassword";
 
 // Admin imports
 import Dashboard from "./components/admin/Dashboard";
-
+import ProductsList from "./components/admin/ProductsList";
 
 import store from "./store";
 import axios from "axios";
@@ -98,7 +97,11 @@ function App() {
                 exact
               />
               <ProtectedRoute path="/orders/me" component={ListOrders} exact />
-              <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
+              <ProtectedRoute
+                path="/order/:id"
+                component={OrderDetails}
+                exact
+              />
               <ProtectedRoute
                 path="/me/update"
                 component={UpdateProfile}
@@ -106,7 +109,18 @@ function App() {
               />
             </Routes>
           </div>
-          <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />       
+          <ProtectedRoute
+            path="/dashboard"
+            isAdmin={true}
+            component={Dashboard}
+            exact
+          />
+          <ProtectedRoute
+            path="/admin/products"
+            isAdmin={true}
+            component={ProductsList}
+            exact
+          />
           <Footer />
         </div>
       </Router>
