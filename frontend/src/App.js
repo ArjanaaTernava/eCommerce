@@ -38,6 +38,7 @@ import ProductsList from "./components/admin/ProductsList";
 import NewProduct from "./components/admin/NewProduct";
 import UpdateProduct from "./components/admin/UpdateProduct";
 import OrdersList from "./components/admin/OrdersLIst";
+import ProcessOrder from "./components/admin/ProcessOrder";
 
 import store from "./store";
 import axios from "axios";
@@ -144,6 +145,12 @@ function App() {
             path="/admin/orders"
             isAdmin={true}
             component={OrdersList}
+            exact
+          />
+          <ProtectedRoute
+            path="/admin/order/:id"
+            isAdmin={true}
+            component={ProcessOrder}
             exact
           />
 
