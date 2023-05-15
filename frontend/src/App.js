@@ -39,6 +39,7 @@ import NewProduct from "./components/admin/NewProduct";
 import UpdateProduct from "./components/admin/UpdateProduct";
 import OrdersList from "./components/admin/OrdersLIst";
 import ProcessOrder from "./components/admin/ProcessOrder";
+import UsersList from "./components/admin/UsersList";
 
 import store from "./store";
 import axios from "axios";
@@ -141,10 +142,16 @@ function App() {
             component={UpdateProduct}
             exact
           />
-           <ProtectedRoute
+          <ProtectedRoute
             path="/admin/orders"
             isAdmin={true}
             component={OrdersList}
+            exact
+          />
+          <ProtectedRoute
+            path="/admin/users"
+            isAdmin={true}
+            component={UsersList}
             exact
           />
           <ProtectedRoute
