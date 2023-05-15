@@ -8,14 +8,19 @@ import Sidebar from "./Sidebar";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { allOrders, clearErrors } from "../../actions/orderActions";
-// import { DELETE_PRODUCT_RESET } from "../../constants/orderConstants";
+import {
+  allOrders,
+  deleteOrder,
+  clearErrors,
+} from "../../actions/orderActions";
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const OrdersList = () => {
+const OrdersList = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const { loading, error, orders } = useSelector((state) => state.allOrders);
+  const { isDeleted } = useSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(allOrders());
@@ -25,12 +30,16 @@ const OrdersList = () => {
       dispatch(clearErrors());
     }
 
-    //   if (isDeleted) {
-    //     alert.success("Product deleted successfully!");
-    //     history.push("/admin/products");
-    //     dispatch({ type: DELETE_PRODUCT_RESET });
-    //   }
-  }, [dispatch, alert, error]);
+    if (isDeleted) {
+      alert.success("Ordert deleted successfully!");
+      history.push("/admin/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
+    }
+  }, [dispatch, alert, error, isDeleted, history]);
+
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
+  };
 
   const setOrders = () => {
     const data = {
@@ -85,7 +94,10 @@ const OrdersList = () => {
               <i className="fa fa-eye"></i>
             </Link>
 
-            <button className="btn btn-danger py-1 px-2 ml-2">
+            <button
+              className="btn btn-danger py-1 px-2 ml-2"
+              onClick={() => deleteOrderHandler(order._id)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </Fragment>
