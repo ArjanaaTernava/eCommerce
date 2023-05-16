@@ -1,14 +1,18 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
-import { UPDATE_USER_RESET } from "../../constants/userConstants";
+import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 
-import MetaData from "../layout/MetaData";
-import { updateUser,getUserDetails, clearErrors } from "../../actions/userActions";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateUser,
+  getUserDetails,
+  clearErrors,
+} from "../../actions/userActions";
+import { UPDATE_USER_RESET } from "../../constants/userConstants";
 
-const UpdateUser = ({history, match}) => {
+const UpdateUser = ({ history, match }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -22,6 +26,7 @@ const UpdateUser = ({history, match}) => {
   const userId = match.params.id;
 
   useEffect(() => {
+    console.log(user && user._id !== userId);
     if (user && user._id !== userId) {
       dispatch(getUserDetails(userId));
     } else {
@@ -48,6 +53,7 @@ const UpdateUser = ({history, match}) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
@@ -59,18 +65,19 @@ const UpdateUser = ({history, match}) => {
   return (
     <Fragment>
       <MetaData title={`Update User`} />
-      <div classNameName="row">
-        <div classNameName="col-12 col-md-2">
+      <div className="row">
+        <div className="col-12 col-md-2">
           <Sidebar />
         </div>
-        <div classNameName="col-12 col-md-10">
+
+        <div className="col-12 col-md-10">
           <div className="row wrapper">
             <div className="col-10 col-lg-5">
               <form className="shadow-lg" onSubmit={submitHandler}>
                 <h1 className="mt-2 mb-5">Update User</h1>
 
                 <div className="form-group">
-                  <label for="name_field">Name</label>
+                  <label htmlFor="name_field">Name</label>
                   <input
                     type="name"
                     id="name_field"
@@ -82,11 +89,11 @@ const UpdateUser = ({history, match}) => {
                 </div>
 
                 <div className="form-group">
-                  <label for="email_field">Email</label>
+                  <label htmlFor="email_field">Email</label>
                   <input
                     type="email"
                     id="email_field"
-                    classNameName="form-control"
+                    className="form-control"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +101,7 @@ const UpdateUser = ({history, match}) => {
                 </div>
 
                 <div className="form-group">
-                  <label for="role_field">Role</label>
+                  <label htmlFor="role_field">Role</label>
 
                   <select
                     id="role_field"

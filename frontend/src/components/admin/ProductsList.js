@@ -10,8 +10,8 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAdminProducts,
-  clearErrors,
   deleteProduct,
+  clearErrors,
 } from "../../actions/productActions";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
@@ -20,11 +20,9 @@ const ProductsList = ({ history }) => {
   const dispatch = useDispatch();
 
   const { loading, error, products } = useSelector((state) => state.products);
-
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
-
   useEffect(() => {
     dispatch(getAdminProducts());
 

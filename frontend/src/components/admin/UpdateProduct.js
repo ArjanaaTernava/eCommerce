@@ -61,16 +61,16 @@ const UpdateProduct = ({ match, history }) => {
       setCategory(product.category);
       setSeller(product.seller);
       setStock(product.stock);
-      setOldImages(product.oldImages);
-    }
-
-    if (updateError) {
-      alert.error(updateError);
-      dispatch(clearErrors());
+      setOldImages(product.images);
     }
 
     if (error) {
       alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (updateError) {
+      alert.error(updateError);
       dispatch(clearErrors());
     }
 
@@ -82,7 +82,7 @@ const UpdateProduct = ({ match, history }) => {
   }, [
     dispatch,
     alert,
-    success,
+    error,
     isUpdated,
     history,
     updateError,
@@ -92,6 +92,7 @@ const UpdateProduct = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
     formData.set("price", price);
@@ -135,6 +136,7 @@ const UpdateProduct = ({ match, history }) => {
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
+
         <div className="col-12 col-md-10">
           <Fragment>
             <div className="wrapper my-5">
@@ -217,6 +219,7 @@ const UpdateProduct = ({ match, history }) => {
 
                 <div className="form-group">
                   <label>Images</label>
+
                   <div className="custom-file">
                     <input
                       type="file"
@@ -232,7 +235,7 @@ const UpdateProduct = ({ match, history }) => {
                   </div>
 
                   {oldImages &&
-                    oldImages.map((img) => {
+                    oldImages.map((img) => (
                       <img
                         key={img}
                         src={img.url}
@@ -240,13 +243,13 @@ const UpdateProduct = ({ match, history }) => {
                         className="mt-3 mr-2"
                         width="55"
                         height="52"
-                      />;
-                    })}
+                      />
+                    ))}
 
                   {imagesPreview.map((img) => (
                     <img
-                      key={img}
                       src={img}
+                      key={img}
                       alt="Images Preview"
                       className="mt-3 mr-2"
                       width="55"

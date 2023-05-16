@@ -13,7 +13,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <a 
+            <a
               href="#productSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
