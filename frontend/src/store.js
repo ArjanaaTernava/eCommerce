@@ -39,7 +39,7 @@ const reducer = combineReducers({
   user: userReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
-  forgotPasswordUser: forgotPasswordReducer,
+  forgotPassword: forgotPasswordReducer,
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,

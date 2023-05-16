@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../actions/cartActions";
 
 const Shipping = ({ history }) => {
-  const countriesList = Object.value(countries);
+  const countriesList = Object.values(countries);
 
   const { shippingInfo } = useSelector((state) => state.cart);
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
   const [postalCode, setPostalCode] = useState(shippingInfo.postalCode);
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.country);
+  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
   const [country, setCountry] = useState(shippingInfo.country);
 
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     dispatch(saveShippingInfo({ address, city, phoneNo, postalCode, country }));
-    history.pushState("/order/confirm");
+    history.push("/confirm");
   };
 
   return (

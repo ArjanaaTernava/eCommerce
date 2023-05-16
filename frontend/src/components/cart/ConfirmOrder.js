@@ -86,11 +86,11 @@ const ConfirmOrder = ({ history }) => {
             <h4>Order Summary</h4>
             <hr />
             <p>
-              Subtotal:
+              Subtotal: {" "}
               <span className="order-summary-values">${itemsPrice}</span>
             </p>
             <p>
-              Shipping:
+              Shipping: {" "}
               <span className="order-summary-values">${shippingPrice}</span>
             </p>
             <p>
