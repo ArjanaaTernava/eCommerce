@@ -50,7 +50,6 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   apiFeatures.pagination(resPerPage);
   products = await apiFeatures.query;
 
-  setTimeout(() => {
     res.status(200).json({
       success: true,
       productsCount,
@@ -58,19 +57,17 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
       filteredProductsCount,
       products,
     });
-  }, 2000);
 });
 
 // Get all products (Admin)  =>  /api/v1/admin/products
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
-  setTimeout(() => {
+
     res.status(200).json({
       success: true,
       products,
     });
-  }, 2000);
 });
 
 // Get single product details  =>  /api/v1/product/:id
@@ -114,7 +111,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
       for (let i = 0; i < images.length; i++) {
         const result = await cloudinary.v2.uploader.upload(images[i], {
-          folder: "product",
+          folder: "products",
         });
 
         imagesLinks.push({
@@ -130,6 +127,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
+    useFindAndModify: false
   });
 
   res.status(200).json({
@@ -153,7 +151,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
-  await product.deleteOne();
+  await product.remove();
 
   res.status(200).json({
     success: true,
