@@ -26,7 +26,6 @@ import {
   GET_REVIEWS_FAIL,
   DELETE_REVIEW_REQUEST,
   DELETE_REVIEW_SUCCESS,
-  DELETE_REVIEW_RESET,
   DELETE_REVIEW_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
@@ -245,7 +244,7 @@ export const deleteReview = (id, productId) => async (dispatch) => {
   } catch (error) {
 
       dispatch({
-          type: GET_REVIEWS_FAIL,
+          type: DELETE_REVIEW_FAIL,
           payload: error.response.data.message
       })
   }

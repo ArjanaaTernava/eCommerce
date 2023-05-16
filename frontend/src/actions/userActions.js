@@ -39,9 +39,9 @@ import {
 } from "../constants/userConstants";
 
 // Login
-export const login = (email, password) => async (dispath) => {
+export const login = (email, password) => async (dispatch) => {
   try {
-    dispath({
+    dispatch({
       type: LOGIN_REQUEST,
     });
 
@@ -57,12 +57,12 @@ export const login = (email, password) => async (dispath) => {
       config
     );
 
-    dispath({
+    dispatch({
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
   } catch (error) {
-    dispath({
+    dispatch({
       type: LOGIN_FAIL,
       payload: error.response.data.message,
     });
@@ -145,7 +145,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     };
 
@@ -170,7 +170,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     };
 

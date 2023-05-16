@@ -70,7 +70,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.PUT(
+    const { data } = await axios.put(
       `/api/v1/admin/order/${id}`,
       orderData,
       config
