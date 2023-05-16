@@ -2,9 +2,9 @@ import React, { Fragment, useEffect } from "react";
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 
-import { alert, useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder, clearErrors } from '../../actions/orderActions'
+import { createOrder, clearErrors } from "../../actions/orderActions";
 
 import {
   useStripe,
@@ -34,84 +34,84 @@ const Payment = ({ history }) => {
 
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
-  const { error } = useSelector(state => state.newOrder)
+  const { error } = useSelector((state) => state.newOrder);
 
   useEffect(() => {
-    if(error){
-      alert.error(error)
-      dispatch(clearErrors())
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
     }
   }, [dispatch, alert, error]);
 
   const order = {
     orderItems: cartItems,
-    shippingInfo
-  }
+    shippingInfo,
+  };
 
-  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
-  if(orderInfo){
-    order.itemsPrice = orderInfo.itemsPrice
-    order.shippingPrice = orderInfo.shippingPrice
-    order.taxPrice = orderInfo.taxPrice
-    order.totalPrice = orderInfo.totalPrice
+  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  if (orderInfo) {
+    order.itemsPrice = orderInfo.itemsPrice;
+    order.shippingPrice = orderInfo.shippingPrice;
+    order.taxPrice = orderInfo.taxPrice;
+    order.totalPrice = orderInfo.totalPrice;
   }
 
   const paymentData = {
-    amount: Math.round(orderInfo.totalPrice * 100)//pass the amount in cents
-}
-const submitHandler = async (e) => {
-  e.preventDefault();
-  document.querySelector('#pay_btn').disabled = true; //cant click multiple times
+    amount: Math.round(orderInfo.totalPrice * 100), //pass the amount in cents
+  };
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    document.querySelector("#pay_btn").disabled = true; //cant click multiple times
 
-  let res;
-  try {
-//post request
+    let res;
+    try {
+      //post request
       const config = {
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      }
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-      res = await axios.post('/api/v1/payment/process', paymentData, config)
+      res = await axios.post("/api/v1/payment/process", paymentData, config);
       const clientSecret = res.data.client_secret;
 
       console.log(clientSecret);
 
       if (!stripe || !elements) {
-          return;
+        return;
       }
 
       const result = await stripe.confirmCardPayment(clientSecret, {
-          payment_method: {
-              card: elements.getElement(CardNumberElement),
-              billing_details: {
-                  name: user.name,
-                  email: user.email
-              }
-          }
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: user.name,
+            email: user.email,
+          },
+        },
       });
 
       if (result.error) {
-          alert.error(result.error.message);
-          document.querySelector('#pay_btn').disabled = false;
+        alert.error(result.error.message);
+        document.querySelector("#pay_btn").disabled = false;
       } else {
-
-          // The payment is processed or not
-          if (result.paymentIntent.status === 'succeeded') {
-            //TODO LATER FOR NEW ORDER  
-            history.push('/success')
-          } else {
-              alert.error('There is some issue while payment processing')
-          }
+        // The payment is processed or not
+        if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrder(order));
+          history.push("/success");
+        } else {
+          alert.error("There is some issue while payment processing");
+        }
       }
- 
-
-  } catch (error) {
-      document.querySelector('#pay_btn').disabled = false;
-      alert.error(error.response.data.message)
-  }
-}
-
+    } catch (error) {
+      document.querySelector("#pay_btn").disabled = false;
+      alert.error(error.response.data.message);
+    }
+  };
 
   return (
     <Fragment>

@@ -40,16 +40,16 @@ export const productsReducer = (state = { products: [] }, action) => {
     case ADMIN_PRODUCTS_REQUEST:
       return {
         loading: true,
-        procuts: [],
+        products: [],
       };
 
     case ALL_PRODUCTS_SUCCESS:
       return {
         loading: false,
-        procuts: action.payload.products,
+        products: action.payload.products,
         productsCount: action.payload.productsCount,
         resPerPage: action.payload.resPerPage,
-        filteredProductsCounts: action.payload.filteredProductsCounts,
+        filteredProductsCounts: action.payload.filteredProductsCount,
       };
 
     case ADMIN_PRODUCTS_SUCCESS:
@@ -187,12 +187,6 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
       return {
         ...state,
         error: action.payload,
-      };
-
-    case NEW_REVIEW_RESET:
-      return {
-        ...state,
-        success: false,
       };
 
     case CLEAR_ERRORS:
