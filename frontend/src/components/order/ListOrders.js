@@ -83,9 +83,9 @@ const ListOrders = () => {
 
       <h1 className="my-5">My Orders</h1>
 
-      {loading ? (
+      {loading ? 
         <Loader />
-      ) : (
+       : (
         <MDBDataTable
         data={setOrders()}
           className="px-3"
