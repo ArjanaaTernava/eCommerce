@@ -27,7 +27,7 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import UpdatePassword from "./components/user/UpdatePassword";
-import ForgotPassword from "./components/user/forgotPassword";
+import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
 
 import { useSelector } from "react-redux";
@@ -168,7 +168,7 @@ function App() {
             component={UpdateUser}
             exact
           />
-                    <ProtectedRoute
+          <ProtectedRoute
             path="/admin/reviews"
             isAdmin={true}
             component={ProductReviews}
