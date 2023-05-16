@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Fragment } from "react";
-import "../../App.css";
 import { Route, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +6,8 @@ import { useAlert } from "react-alert";
 import { logout } from "../../actions/userActions";
 
 import Search from "./Search";
+
+import "../../App.css";
 
 const Header = () => {
   const alert = useAlert();
@@ -18,7 +18,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged out successfully!");
+    alert.success("Logged out successfully.");
   };
 
   return (
@@ -27,7 +27,7 @@ const Header = () => {
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
             <Link to="/">
-              <img id="logo" src="/images/logo.jpg" />
+              <img src="/images/shopit_logo.png" />
             </Link>
           </div>
         </div>
@@ -37,21 +37,17 @@ const Header = () => {
         </div>
 
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <Link
-            to="/cart"
-            style={{
-              textDecoration: "none",
-            }}
-          >
-            <span id="cart" class="ml-3">
+          <Link to="/cart" style={{ textDecoration: "none" }}>
+            <span id="cart" className="ml-3">
               Cart
             </span>
-            <span className="ml-1" id="cart-count">
+            <span className="ml-1" id="cart_count">
               {cartItems.length}
             </span>
           </Link>
+
           {user ? (
-            <div className="m1-4 dropdown d-inline">
+            <div className="ml-4 dropdown d-inline">
               <Link
                 to="#!"
                 className="btn dropdown-toggle text-white mr-4"
@@ -75,7 +71,7 @@ const Header = () => {
                 className="dropdown-menu"
                 aria-labelledby="dropDownMenuButton"
               >
-                {user && user.role !== "admin" && (
+                {user && user.role === "admin" && (
                   <Link className="dropdown-item" to="/dashboard">
                     Dashboard
                   </Link>
@@ -87,7 +83,7 @@ const Header = () => {
                   Profile
                 </Link>
                 <Link
-                  className="dropdown-iteam text-danger"
+                  className="dropdown-item text-danger"
                   to="/"
                   onClick={logoutHandler}
                 >
@@ -97,7 +93,7 @@ const Header = () => {
             </div>
           ) : (
             !loading && (
-              <Link to="/login" className="btn ml-4" id="login-btn">
+              <Link to="/login" className="btn ml-4" id="login_btn">
                 Login
               </Link>
             )
