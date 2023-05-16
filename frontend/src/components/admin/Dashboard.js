@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAdminProducts } from "../../actions/productActions";
 import { allOrders } from "../../actions/orderActions";
-import { allUsers } from '../../actions/userActions'
+import { allUsers } from "../../actions/userActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(allOrders());
-    dispatch(allUsers())
+    dispatch(allUsers());
   }, [dispatch]);
 
   return (

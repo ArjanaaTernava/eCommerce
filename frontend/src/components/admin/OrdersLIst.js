@@ -15,7 +15,7 @@ import {
 } from "../../actions/orderActions";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const OrdersList = ({ history }) => {
+const OrdersLIst = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const OrdersList = ({ history }) => {
     }
 
     if (isDeleted) {
-      alert.success("Ordert deleted successfully!");
+      alert.success("Order deleted successfully!");
       history.push("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
@@ -137,4 +137,4 @@ const OrdersList = ({ history }) => {
   );
 };
 
-export default OrdersList;
+export default OrdersLIst;

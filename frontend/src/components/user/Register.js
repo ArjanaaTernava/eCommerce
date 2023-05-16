@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 
+import MetaData from "../layout/MetaData";
+
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-
-import MetaData from "../layout/MetaData";
 import { register, clearErrors } from "../../actions/userActions";
 
 const Register = ({ history }) => {
@@ -40,6 +40,7 @@ const Register = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
@@ -65,7 +66,7 @@ const Register = ({ history }) => {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
- 
+
   return (
     <Fragment>
       <MetaData title={"Register User"} />

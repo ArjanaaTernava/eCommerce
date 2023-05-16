@@ -13,8 +13,7 @@ const options = {
   transtion: transitions.SCALE,
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
       <App />

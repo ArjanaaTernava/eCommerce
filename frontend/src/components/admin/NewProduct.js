@@ -38,8 +38,6 @@ const NewProduct = ({ history }) => {
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
   useEffect(() => {
-    dispatch(getAdminProducts());
-
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -47,10 +45,10 @@ const NewProduct = ({ history }) => {
 
     if (success) {
       history.push("/admin/products");
-      alert.success("Products created successfully");
+      alert.success("Product created successfully");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
-  }, [dispatch, alert, success, history]);
+  }, [dispatch, alert, error, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();

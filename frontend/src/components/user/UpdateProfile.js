@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useEffect } from "react";
 
+import MetaData from "../layout/MetaData";
+
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
-
-import MetaData from "../layout/MetaData";
 import {
   updateProfile,
   loadUser,
   clearErrors,
 } from "../../actions/userActions";
+import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 
 const UpdateProfile = ({ history }) => {
   const [name, setName] = useState("");
@@ -51,6 +51,7 @@ const UpdateProfile = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
@@ -74,6 +75,7 @@ const UpdateProfile = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={"Update Profile"} />
+
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form

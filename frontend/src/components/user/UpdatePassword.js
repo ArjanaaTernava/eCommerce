@@ -53,7 +53,7 @@ const UpdatePassword = ({ history }) => {
             <h1 className="mt-2 mb-5">Update Password</h1>
             <div className="form-group">
               <label for="old_password_field">Old Password</label>
-              <input 
+              <input
                 type="password"
                 id="old_password_field"
                 className="form-control"

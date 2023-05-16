@@ -28,7 +28,7 @@ const UsersList = ({ history }) => {
 
     if (isDeleted) {
       alert.success("User deleted successfully");
-      history.push("/admin/orders");
+      history.push("/admin/users");
       dispatch({ type: DELETE_USER_RESET });
     }
   }, [dispatch, alert, error, isDeleted, history]);
