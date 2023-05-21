@@ -26,12 +26,12 @@ const productSchema = new mongoose.Schema({
       // image id
       public_id: {
         type: String,
-        required: true,
+        required: false,
       },
       // image url
       url: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],

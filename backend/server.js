@@ -2,12 +2,17 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
+const express = require('express');
+const swaggerSetup = require('./utils/swagger');
 
 // Setting up config file:
 dotenv.config({ path: "backend/config/config.env" });
 
 // Connect to Database
 connectDatabase();
+
+// Set up Swagger
+swaggerSetup(app);
 
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
