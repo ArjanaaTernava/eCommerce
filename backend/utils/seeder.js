@@ -11,12 +11,11 @@ connectDatabase();
 
 const seedProducts = async () => {
   try {
-    // Delete all the products in the database then insert all the products from the product file
     await Product.deleteMany();
-    console.log("Products are deleted!");
+    console.log("Products are deleted");
 
     await Product.insertMany(products);
-    console.log("All products are added!");
+    console.log("All Products are added.");
 
     process.exit();
   } catch (error) {

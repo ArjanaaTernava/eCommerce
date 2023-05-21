@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
@@ -48,6 +49,7 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -66,8 +68,8 @@ function App() {
   const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
 
   return (
-    <Router>
       <div className="App">
+      <Router>
         <Header />
         <div className="container container-fluid">
           <Route path="/" component={Home} exact />
@@ -156,8 +158,9 @@ function App() {
         />
 
         {!loading && (!isAuthenticated || user.role !== "admin") && <Footer />}
+        </Router>
       </div>
-    </Router>
+
   );
 }
 

@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please enter product's name!"],
+    required: [true, "Please enter product name"],
     trim: true,
-    maxLength: [100, "Product's name can not exceed 100 characters!"],
+    maxLength: [100, "Product name cannot exceed 100 characters"],
   },
   price: {
     type: Number,
-    required: [true, "Please enter the product's price!"],
-    maxLength: [5, "Product's price can not exceed 5 figures!"],
+    required: [true, "Please enter product price"],
+    maxLength: [5, "Product name cannot exceed 5 characters"],
     default: 0.0,
   },
   description: {
     type: String,
-    required: [true, "Please enter the product's description!"],
+    required: [true, "Please enter product description"],
   },
   ratings: {
     type: Number,
@@ -23,12 +23,10 @@ const productSchema = new mongoose.Schema({
   },
   images: [
     {
-      // image id
       public_id: {
         type: String,
         required: false,
       },
-      // image url
       url: {
         type: String,
         required: false,
@@ -37,7 +35,7 @@ const productSchema = new mongoose.Schema({
   ],
   category: {
     type: String,
-    required: [true, "Please select the category for this product!"],
+    required: [true, "Please select category for this product"],
     enum: {
       values: [
         "Electronics",
@@ -53,17 +51,17 @@ const productSchema = new mongoose.Schema({
         "Outdoor",
         "Home",
       ],
-      message: "Please select the correct category for the product!",
+      message: "Please select correct category for product",
     },
   },
   seller: {
     type: String,
-    required: [true, "Please enter product's seller!"],
+    required: [true, "Please enter product seller"],
   },
   stock: {
     type: Number,
-    required: [true, "Please enter product's stock"],
-    maxLength: [5, "Product's stock can not exceed 5 figures!"],
+    required: [true, "Please enter product stock"],
+    maxLength: [5, "Product name cannot exceed 5 characters"],
     default: 0,
   },
   numOfReviews: {
@@ -94,7 +92,7 @@ const productSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,

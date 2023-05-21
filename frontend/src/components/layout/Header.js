@@ -30,7 +30,7 @@ const Header = () => {
               <img
                 alt=""
                 src="/images/logo.jpg"
-                style={{ maxWidth: "100%", height: "auto" }}
+                style={{ maxWidth: "100%", height: "50px" }}
               />
             </Link>
           </div>

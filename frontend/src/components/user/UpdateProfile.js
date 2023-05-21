@@ -15,7 +15,7 @@ const UpdateProfile = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
+  const [setAvatarPreview] = useState(
     "/images/default_avatar.jpg"
   );
 
@@ -29,7 +29,7 @@ const UpdateProfile = ({ history }) => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
+      //setAvatarPreview(user.avatar.url);
     }
 
     if (error) {
@@ -114,11 +114,11 @@ const UpdateProfile = ({ history }) => {
               <div className="d-flex align-items-center">
                 <div>
                   <figure className="avatar mr-3 item-rtl">
-                    <img
+                    {/* <img
                       src={avatarPreview}
                       className="rounded-circle"
                       alt="Avatar Preview"
-                    />
+                    /> */}
                   </figure>
                 </div>
                 <div className="custom-file">
