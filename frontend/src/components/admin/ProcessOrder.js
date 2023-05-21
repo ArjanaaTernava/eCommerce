@@ -46,7 +46,7 @@ const ProcessOrder = ({ match }) => {
       alert.success("Order updated successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
-  }, [dispatch, alert, isUpdated, orderId]);
+  }, [dispatch, alert, isUpdated, orderId, error]);
 
   const updateOrderHandler = (id) => {
     const formData = new FormData();

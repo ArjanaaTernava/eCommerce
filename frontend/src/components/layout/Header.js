@@ -27,7 +27,11 @@ const Header = () => {
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
             <Link to="/">
-              <img alt="" src="/images/logo.jpg" />
+              <img
+                alt=""
+                src="/images/logo.jpg"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
             </Link>
           </div>
         </div>
