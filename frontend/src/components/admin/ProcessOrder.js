@@ -20,7 +20,7 @@ const ProcessOrder = ({ match }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, order = {} } = useSelector((state) => state.OrderDetails);
+  const { loading, order = {} } = useSelector((state) => state.orderDetails);
   const {
     shippingInfo,
     orderItems,
@@ -29,7 +29,6 @@ const ProcessOrder = ({ match }) => {
     totalPrice,
     orderStatus,
   } = order;
-
   const { error, isUpdated } = useSelector((state) => state.order);
 
   const orderId = match.params.id;
@@ -46,7 +45,7 @@ const ProcessOrder = ({ match }) => {
       alert.success("Order updated successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
-  }, [dispatch, alert, isUpdated, orderId, error]);
+  }, [dispatch, alert, error, isUpdated, orderId]);
 
   const updateOrderHandler = (id) => {
     const formData = new FormData();
@@ -57,8 +56,7 @@ const ProcessOrder = ({ match }) => {
 
   const shippingDetails =
     shippingInfo &&
-    `${shippingInfo.address},
-  ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`;
+    `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`;
   const isPaid =
     paymentInfo && paymentInfo.status === "succeeded" ? true : false;
 
@@ -69,6 +67,7 @@ const ProcessOrder = ({ match }) => {
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
+
         <div className="col-12 col-md-10">
           <Fragment>
             {loading ? (
