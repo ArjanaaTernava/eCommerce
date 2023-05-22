@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 
@@ -13,6 +14,7 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from "@stripe/react-stripe-js";
+
 import axios from "axios";
 
 const options = {
@@ -57,15 +59,16 @@ const Payment = ({ history }) => {
   }
 
   const paymentData = {
-    amount: Math.round(orderInfo.totalPrice * 100), //pass the amount in cents
+    amount: Math.round(orderInfo.totalPrice * 100),
   };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    document.querySelector("#pay_btn").disabled = true; //cant click multiple times
+
+    document.querySelector("#pay_btn").disabled = true;
 
     let res;
     try {
-      //post request
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -73,6 +76,7 @@ const Payment = ({ history }) => {
       };
 
       res = await axios.post("/api/v1/payment/process", paymentData, config);
+
       const clientSecret = res.data.client_secret;
 
       console.log(clientSecret);
@@ -101,7 +105,9 @@ const Payment = ({ history }) => {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
+
           dispatch(createOrder(order));
+
           history.push("/success");
         } else {
           alert.error("There is some issue while payment processing");
@@ -121,11 +127,10 @@ const Payment = ({ history }) => {
 
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form className="shadow-lg">
+          <form className="shadow-lg" onSubmit={submitHandler}>
             <h1 className="mb-4">Card Info</h1>
-            <div className="form-group" onSubmit={submitHandler}>
+            <div className="form-group">
               <label htmlFor="card_num_field">Card Number</label>
-              {/* Will automatically validate */}
               <CardNumberElement
                 type="text"
                 id="card_num_field"
