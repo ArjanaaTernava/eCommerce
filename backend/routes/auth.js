@@ -35,8 +35,12 @@ router
   .get(isAuthenticatedUser, authorizeRoles("admin"), allUsers);
 router
   .route("/admin/user/:id")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails);
+router
+  .route("/admin/update/user/:id")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateUser);
+router
+  .route("/admin/delete/user/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
 module.exports = router;

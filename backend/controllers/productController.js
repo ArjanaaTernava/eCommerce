@@ -13,7 +13,7 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     images = req.body.images;
   }
 
-  let imagesLinks = [];
+/*   let imagesLinks = [];
 
   for (let i = 0; i < images.length; i++) {
     const result = await cloudinary.v2.uploader.upload(images[i], {
@@ -26,7 +26,7 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     });
   }
 
-  req.body.images = imagesLinks;
+  req.body.images = imagesLinks; */
   req.body.user = req.user.id;
   const product = await Product.create(req.body);
   // Product is created:

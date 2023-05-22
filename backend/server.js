@@ -1,13 +1,10 @@
 const app = require("./app");
 const connectDatabase = require("./config/database");
-const express = require('express');
-const swaggerSetup = require('./utils/swagger');
+const swaggerSetup = require("./utils/swagger");
+
 
 // const dotenv = require('dotenv');
 const cloudinary = require("cloudinary");
-
-// Set up Swagger
-swaggerSetup(app);
 
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -31,6 +28,9 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+// Swagger setup
+swaggerSetup();
 
 const server = app.listen(process.env.PORT, () => {
   console.log(

@@ -1,0 +1,1500 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "eBlej eCommerce Project",
+        "description": "API documentation for \"eBlej\" eCommerce web application using MERN stack",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000",
+    "basePath": "/api/v1",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register a user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "avatar": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "avatar"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login User",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Please enter email & password"
+                    },
+                    "401": {
+                        "description": "Invalid Email or Password"
+                    }
+                }
+            }
+        },
+        "/password/forgot": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forgot Password",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found with this email"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/password/reset/{token}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Reset Password",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "confirmPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "password",
+                                    "confirmPassword"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Password reset token is invalid or has been expired"
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get currently logged in user details",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/password/update": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update / Change password",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "oldPassword",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "401": {
+                        "description": "Old password is incorrect"
+                    }
+                }
+            }
+        },
+        "/me/update": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user profile",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "avatar": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "Logged out"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get all users",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "users": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/user/{id}": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get user details",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "user": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User does not found"
+                    }
+                }
+            }
+        },
+        "/admin/user/update/{id}": {
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update user profile",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            "user": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/user/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Delete user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/order/new": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create a new order",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "orderItems": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/OrderItem"
+                                        }
+                                    },
+                                    "shippingInfo": {
+                                        "$ref": "#/definitions/ShippingInfo"
+                                    },
+                                    "itemsPrice": {
+                                        "type": "number"
+                                    },
+                                    "taxPrice": {
+                                        "type": "number"
+                                    },
+                                    "shippingPrice": {
+                                        "type": "number"
+                                    },
+                                    "totalPrice": {
+                                        "type": "number"
+                                    },
+                                    "paymentInfo": {
+                                        "$ref": "#/definitions/PaymentInfo"
+                                    }
+                                },
+                                "required": [
+                                    "orderItems",
+                                    "shippingInfo",
+                                    "itemsPrice",
+                                    "taxPrice",
+                                    "shippingPrice",
+                                    "totalPrice",
+                                    "paymentInfo"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all orders - ADMIN",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get single order",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    },
+                    "404": {
+                        "description": "No Order found with this ID"
+                    }
+                }
+            }
+        },
+        "/orders/me": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get logged in user orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/update/{id}": {
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update / Process order - ADMIN",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "You have already delivered this order"
+                    }
+                }
+            }
+        },
+        "/admin/order/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Delete order",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "No Order found with this ID"
+                    }
+                }
+            }
+        },
+        "/payment/process": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Process stripe payments",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "amount"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "client_secret": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/stripeapi": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Send stripe API Key",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "stripeApiKey": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/new": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Create a new product",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "product": {
+                                    "$ref": "#/definitions/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all products",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Keyword for product search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "productsCount": {
+                                    "type": "integer"
+                                },
+                                "resPerPage": {
+                                    "type": "integer"
+                                },
+                                "filteredProductsCount": {
+                                    "type": "integer"
+                                },
+                                "products": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/products": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Product"
+                ],
+                "summary": "Get all products (Admin)",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "products": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get single product details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "product": {
+                                    "$ref": "#/definitions/Product"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/admin/update/product/{id}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Product"
+                ],
+                "summary": "Update product",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/ProductUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "product": {
+                                    "$ref": "#/definitions/Product"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/admin/product/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Product"
+                ],
+                "summary": "Delete product",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "Product was deleted successfully!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/review/new": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Create new review",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "rating": {
+                                        "type": "number"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "productId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "rating",
+                                    "comment",
+                                    "productId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reviews": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Get Product Reviews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "reviews": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Review"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reviews/delete": {
+            "delete": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Delete Product Review",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "query",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Review ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    },
+    "definitions": {
+        "Order": {
+            "type": "object",
+            "properties": {
+                "shippingInfo": {
+                    "type": "object",
+                    "properties": {
+                        "address": {
+                            "type": "string"
+                        },
+                        "city": {
+                            "type": "string"
+                        },
+                        "phoneNo": {
+                            "type": "string"
+                        },
+                        "postalCode": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "address",
+                        "city",
+                        "phoneNo",
+                        "postalCode",
+                        "country"
+                    ]
+                },
+                "user": {
+                    "type": "string"
+                },
+                "orderItems": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "quantity": {
+                                "type": "number"
+                            },
+                            "image": {
+                                "type": "string"
+                            },
+                            "price": {
+                                "type": "number"
+                            },
+                            "product": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "quantity",
+                            "image",
+                            "price",
+                            "product"
+                        ]
+                    }
+                },
+                "paymentInfo": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "paidAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "itemsPrice": {
+                    "type": "number",
+                    "default": 0.0
+                },
+                "taxPrice": {
+                    "type": "number",
+                    "default": 0.0
+                },
+                "shippingPrice": {
+                    "type": "number",
+                    "default": 0.0
+                },
+                "totalPrice": {
+                    "type": "number",
+                    "default": 0.0
+                },
+                "orderStatus": {
+                    "type": "string",
+                    "default": "Processing"
+                },
+                "deliveredAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "default": "now"
+                }
+            },
+            "required": [
+                "shippingInfo",
+                "user",
+                "orderItems"
+            ]
+        },
+        "Product": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "description": "Product name",
+                    "example": "Example Product"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "Product price",
+                    "example": 9.99
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Product description",
+                    "example": "Example product description"
+                },
+                "ratings": {
+                    "type": "number",
+                    "description": "Product ratings",
+                    "example": 4.5
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "public_id": {
+                                "type": "string",
+                                "description": "Image public ID",
+                                "example": "abcd1234"
+                            },
+                            "url": {
+                                "type": "string",
+                                "description": "Image URL",
+                                "example": "https://example.com/image.jpg"
+                            }
+                        }
+                    },
+                    "description": "Product images"
+                },
+                "category": {
+                    "type": "string",
+                    "enum": [
+                        "Electronics",
+                        "Cameras",
+                        "Laptops",
+                        "Accessories",
+                        "Headphones",
+                        "Food",
+                        "Books",
+                        "Clothes/Shoes",
+                        "Beauty/Health",
+                        "Sports",
+                        "Outdoor",
+                        "Home"
+                    ],
+                    "description": "Product category",
+                    "example": "Electronics"
+                },
+                "seller": {
+                    "type": "string",
+                    "description": "Product seller",
+                    "example": "Example Seller"
+                },
+                "stock": {
+                    "type": "number",
+                    "description": "Product stock",
+                    "example": 10
+                },
+                "numOfReviews": {
+                    "type": "number",
+                    "description": "Number of product reviews",
+                    "example": 5
+                },
+                "reviews": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "type": "string",
+                                "description": "User ID",
+                                "example": "1234"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Reviewer name",
+                                "example": "John Doe"
+                            },
+                            "rating": {
+                                "type": "number",
+                                "description": "Review rating",
+                                "example": 4.5
+                            },
+                            "comment": {
+                                "type": "string",
+                                "description": "Review comment",
+                                "example": "Great product!"
+                            }
+                        },
+                        "required": [
+                            "user",
+                            "name",
+                            "rating",
+                            "comment"
+                        ]
+                    },
+                    "description": "Product reviews"
+                },
+                "user": {
+                    "type": "string",
+                    "description": "User ID",
+                    "example": "1234"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Creation date and time",
+                    "example": "2023-05-22T10:30:00Z"
+                }
+            },
+            "required": [
+                "name",
+                "price",
+                "description",
+                "category",
+                "seller",
+                "stock"
+            ]
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "description": "User name",
+                    "example": "John Doe"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "john@example.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "password123"
+                },
+                "avatar": {
+                    "type": "object",
+                    "properties": {
+                        "public_id": {
+                            "type": "string",
+                            "description": "Avatar public ID",
+                            "example": "abcd1234"
+                        },
+                        "url": {
+                            "type": "string",
+                            "description": "Avatar URL",
+                            "example": "https://example.com/avatar.jpg"
+                        }
+                    }
+                },
+                "role": {
+                    "type": "string",
+                    "default": "user",
+                    "description": "User role",
+                    "example": "user"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Creation date and time",
+                    "example": "2023-05-22T10:30:00Z"
+                },
+                "resetPasswordToken": {
+                    "type": "string",
+                    "description": "Password reset token"
+                },
+                "resetPasswordExpire": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Password reset token expiration date and time"
+                }
+            },
+            "required": [
+                "name",
+                "email",
+                "password"
+            ]
+        }
+    }
+}
