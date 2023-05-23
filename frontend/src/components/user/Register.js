@@ -1,25 +1,13 @@
-import React, { Fragment, useState, useEffect } from "react";
-
-import MetaData from "../layout/MetaData";
-
+import React, { Fragment } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { register, clearErrors } from "../../actions/userActions";
 
+import MetaData from "../layout/MetaData";
+
 const Register = ({ history }) => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { name, email, password } = user;
-
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
-    "/images/default_avatar.jpg"
-  );
-
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -27,7 +15,31 @@ const Register = ({ history }) => {
     (state) => state.auth
   );
 
-  useEffect(() => {
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+    .max(30, 'Name must not exceed 30 characters')
+    .required('Name is required'),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+      password: Yup.string()
+      .min(6, 'Password must be at least 6 characters long')
+      .required('Password is required'),
+  });
+
+  const onSubmit = (values, { setSubmitting }) => {
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    formData.append("avatar", values.avatar);
+
+    dispatch(register(formData));
+
+    setSubmitting(false);
+  };
+
+  React.useEffect(() => {
     if (isAuthenticated) {
       history.push("/");
     }
@@ -38,121 +50,104 @@ const Register = ({ history }) => {
     }
   }, [dispatch, alert, isAuthenticated, error, history]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
-    formData.set("password", password);
-    formData.set("avatar", avatar);
-
-    dispatch(register(formData));
-  };
-
-  const onChange = (e) => {
-    if (e.target.name === "avatar") {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    }
-  };
-
   return (
     <Fragment>
       <MetaData title={"Register User"} />
 
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form
-            className="shadow-lg"
-            onSubmit={submitHandler}
-            encType="multipart/form-data"
+          <Formik
+            initialValues={{
+              name: "",
+              email: "",
+              password: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
           >
-            <h1 className="mb-3">Register</h1>
+            {({ isSubmitting }) => (
+              <Form className="shadow-lg">
+                <h1 className="mb-3">Register</h1>
 
-            <div className="form-group">
-              <label htmlFor="email_field">Name</label>
-              <input
-                type="name"
-                id="name_field"
-                className="form-control"
-                name="name"
-                value={name}
-                onChange={onChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email_field">Email</label>
-              <input
-                type="email"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={email}
-                onChange={onChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password_field">Password</label>
-              <input
-                type="password"
-                id="password_field"
-                className="form-control"
-                name="password"
-                value={password}
-                onChange={onChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="avatar_upload">Avatar</label>
-              <div className="d-flex align-items-center">
-                <div>
-                  <figure className="avatar mr-3 item-rtl">
-                    <img
-                      src={avatarPreview}
-                      className="rounded-circle"
-                      alt="Avatar Preview"
-                    />
-                  </figure>
-                </div>
-                <div className="custom-file">
-                  <input
-                    type="file"
-                    name="avatar"
-                    className="custom-file-input"
-                    id="customFile"
-                    accept="images/*"
-                    onChange={onChange}
+                <div className="form-group">
+                  <label htmlFor="name_field">Name</label>
+                  <Field
+                    type="text"
+                    id="name_field"
+                    className="form-control"
+                    name="name"
                   />
-                  <label className="custom-file-label" htmlFor="customFile">
-                    Choose Avatar
-                  </label>
+                  <ErrorMessage name="name" component="div" className="error" />
                 </div>
-              </div>
-            </div>
 
-            <button
-              id="register_button"
-              type="submit"
-              className="btn btn-block py-3"
-              disabled={loading ? true : false}
-            >
-              REGISTER
-            </button>
-          </form>
+                <div className="form-group">
+                  <label htmlFor="email_field">Email</label>
+                  <Field
+                    type="email"
+                    id="email_field"
+                    className="form-control"
+                    name="email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password_field">Password</label>
+                  <Field
+                    type="password"
+                    id="password_field"
+                    className="form-control"
+                    name="password"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="avatar_upload">Avatar</label>
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <figure className="avatar mr-3 item-rtl">
+                        <img
+                          src="/images/default_avatar.jpg"
+                          className="rounded-circle"
+                          alt="Avatar Preview"
+                        />
+                      </figure>
+                    </div>
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        name="avatar"
+                        className="custom-file-input"
+                        id="customFile"
+                        accept="images/*"
+                      />
+                      <label className="custom-file-label" htmlFor="customFile">
+                        Choose Avatar
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  id="register_button"
+                  type="submit"
+                  className="btn btn-block py-3"
+                  disabled={isSubmitting || loading}
+                >
+                  REGISTER
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </Fragment>
