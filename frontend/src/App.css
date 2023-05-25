@@ -1,7 +1,7 @@
 html,
 body {
-  font-family: "Amazon Ember";
-  width: 100%;
+font-family: 'Times New Roman', Times, serif; 
+ width: 100%;
   height: 100%;
   margin: 0px;
   padding: 0px;
@@ -618,4 +618,29 @@ ul.CTAs a {
 .error {
   color: red;
   font-size: 12px;
+}
+
+.navbartest{
+  flex: auto;
+  justify-content: space-around;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+}
+
+.navbaricons{
+  margin-top: 100px;
+  margin-bottom: -110px;
+  height: 100px;
+  align-items: center;
+  width: 100%;
+  flex: auto;
+  justify-content: space-around;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+  background-color: #bfc3c7b5;
+}
+
+.navbarpayment{
+  justify-content: space-between;
+
 }

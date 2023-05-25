@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Cameras from "../categories/Cameras";
 import Foods from "../categories/Foods";
 import Accessories from "../categories/Accessories";
@@ -11,9 +11,9 @@ const NavigationBar = () => {
   return (
     <>
       <Router>
-        <Navbar bg="light" variant="light">
-          <Container className="justify-content-center sticky-top">
-            <Nav className="">
+        <Navbar bg="light">
+          <Container className="sticky-top navbartest">
+            <Nav className="navbartest">
               <Link to="/electronics" className="nav-link">
                 Electronics
               </Link>
@@ -35,14 +35,12 @@ const NavigationBar = () => {
             </Nav>
           </Container>
         </Navbar>
-        <Routes>
           <Route path="/electronics" element={<Electronics />} />
           <Route path="/laptops" element={<Laptops />} />
           <Route path="/accessories" element={<Accessories />} />
           <Route path="/cameras" element={<Cameras />} />
           <Route path="/foods" element={<Foods />} />
           <Route path="/headphones" element={<Headphones />} />
-        </Routes>
       </Router>
     </>
   );
