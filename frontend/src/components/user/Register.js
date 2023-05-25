@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useAlert } from "react-alert";
@@ -17,22 +17,31 @@ const Register = ({ history }) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-    .max(30, 'Name must not exceed 30 characters')
-    .required('Name is required'),
+      .max(30, "Name must not exceed 30 characters")
+      .required("Name is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-      password: Yup.string()
-      .min(6, 'Password must be at least 6 characters long')
-      .required('Password is required'),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
   });
 
   const onSubmit = (values, { setSubmitting }) => {
+    // if (!values.avatar) {
+    //   // Handle case when avatar file is not selected
+    //   alert.error("Please select an avatar");
+    //   setSubmitting(false);
+    //   return;
+    // }
+
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("email", values.email);
     formData.append("password", values.password);
-    formData.append("avatar", values.avatar);
+    formData.append("avatar", image);
+
+    console.log();
 
     dispatch(register(formData));
 
@@ -49,6 +58,7 @@ const Register = ({ history }) => {
       dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error, history]);
+  const [image, setImage] = useState();
 
   return (
     <Fragment>
@@ -61,6 +71,7 @@ const Register = ({ history }) => {
               name: "",
               email: "",
               password: "",
+              avatar: null,
             }}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
@@ -116,7 +127,11 @@ const Register = ({ history }) => {
                     <div>
                       <figure className="avatar mr-3 item-rtl">
                         <img
-                          src="/images/default_avatar.jpg"
+                          src={
+                            image
+                              ? URL.createObjectURL(image)
+                              : "/images/default_avatar.jpg"
+                          }
                           className="rounded-circle"
                           alt="Avatar Preview"
                         />
@@ -129,9 +144,11 @@ const Register = ({ history }) => {
                         className="custom-file-input"
                         id="customFile"
                         accept="images/*"
+                        multiple={false}
+                        onChange={(e) => setImage(e.target.files[0])}
                       />
                       <label className="custom-file-label" htmlFor="customFile">
-                        Choose Avatar
+                        {image ? image.name : "Choose Avatar"}
                       </label>
                     </div>
                   </div>
