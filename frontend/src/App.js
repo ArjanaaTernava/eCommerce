@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import NavigationBar from "./components/layout/NavigationBar";
+
 
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
@@ -70,7 +72,8 @@ function App() {
   return (
       <div className="App">
       <Router>
-        <Header />
+      <Header/>
+      <NavigationBar/>
         <div className="container container-fluid">
           <Route path="/" component={Home} exact />
           <Route path="/search/:keyword" component={Home} />
@@ -157,7 +160,8 @@ function App() {
           exact
         />
 
-        {!loading && (!isAuthenticated || user.role !== "admin") && <Footer />}
+        {!loading && (!isAuthenticated || user.role !== "admin")}
+        <Footer />
         </Router>
       </div>
 
