@@ -23,7 +23,8 @@ const Header = () => {
 
   return (
     <Fragment>
-      <nav className="navbar row">
+      <nav className="navbar row"
+      style={{backgroundColor:"black"}}>
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
             <Link to="/">
