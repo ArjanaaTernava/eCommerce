@@ -40,7 +40,7 @@ const Brands = () => {
             <div className="card">
               <Link to={`/brands/${brand._id}`} className="card-link">
                 <img
-                  src="/images/lenovoPng.jpg"
+                  src={brand.images[0]?.url}
                   alt={brand.name}
                   className="card-img-top"
                 />
