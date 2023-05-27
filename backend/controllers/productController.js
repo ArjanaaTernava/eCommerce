@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const Category = require("../models/category");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
@@ -6,29 +7,37 @@ const cloudinary = require("cloudinary");
 
 // Creating the new product => /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
-  let images = [];
-  if (typeof req.body.images === "string") {
-    images.push(req.body.images);
-  } else {
-    images = req.body.images;
-  }
+  // let images = [];
+  // if (typeof req.body.images === "string") {
+  //   images.push(req.body.images);
+  // } else {
+  //   images = req.body.images;
+  // }
 
-  let imagesLinks = [];
+  // let imagesLinks = [];
 
-  for (let i = 0; i < images.length; i++) {
-    const result = await cloudinary.v2.uploader.upload(images[i], {
-      folder: "product",
-    });
+  // for (let i = 0; i < images.length; i++) {
+  //   const result = await cloudinary.v2.uploader.upload(images[i], {
+  //     folder: "product",
+  //   });
 
-    imagesLinks.push({
-      public_id: result.public_id,
-      url: result.secure_url,
-    });
-  }
+  //   imagesLinks.push({
+  //     public_id: result.public_id,
+  //     url: result.secure_url,
+  //   });
+  // }
 
-  req.body.images = imagesLinks;
+  // req.body.images = imagesLinks;
   req.body.user = req.user.id;
+
+  const newCategory = await Category.findOne({ name: req.body.category });
+
+  console.log(req.body);
+
+  // console.log(newCategory);
+  req.body.category = newCategory;
   const product = await Product.create(req.body);
+
   // Product is created:
   res.status(201).json({
     success: true,
@@ -50,24 +59,23 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   apiFeatures.pagination(resPerPage);
   products = await apiFeatures.query;
 
-    res.status(200).json({
-      success: true,
-      productsCount,
-      resPerPage,
-      filteredProductsCount,
-      products,
-    });
+  res.status(200).json({
+    success: true,
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
+    products,
+  });
 });
 
 // Get all products (Admin)  =>  /api/v1/admin/products
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
-
-    res.status(200).json({
-      success: true,
-      products,
-    });
+  res.status(200).json({
+    success: true,
+    products,
+  });
 });
 
 // Get single product details  =>  /api/v1/product/:id
@@ -127,7 +135,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   res.status(200).json({

@@ -29,6 +29,7 @@ const ProductDetails = ({ match }) => {
     (state) => state.newReview
   );
 
+
   useEffect(() => {
     dispatch(getProductDetails(match.params.id));
     if (error) {
@@ -123,7 +124,7 @@ const ProductDetails = ({ match }) => {
 
     dispatch(newReview(formData));
   };
-
+  
   return (
     <Fragment>
       {loading ? (

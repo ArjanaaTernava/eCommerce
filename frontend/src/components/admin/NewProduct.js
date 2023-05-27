@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import { getCategories } from "../../actions/categoryActions";
 
 const NewProduct = ({ history }) => {
   const [name, setName] = useState("");
@@ -18,26 +19,21 @@ const NewProduct = ({ history }) => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = [
-    "Electronics",
-    "Cameras",
-    "Laptops",
-    "Accessories",
-    "Headphones",
-    "Food",
-    "Books",
-    "Clothes/Shoes",
-    "Beauty/Health",
-    "Sports",
-    "Outdoor",
-    "Home",
-  ];
+
 
   const alert = useAlert();
   const dispatch = useDispatch();
 
+  // const categories2 = dispatch(getcategories2());
+  // console.log(categories2);
+
   const { loading, error, success } = useSelector((state) => state.newProduct);
+  const {  categories } = useSelector((state) => state.getCategories);
+
+  console.log(categories);
+
   useEffect(() => {
+    dispatch(getCategories())
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -142,12 +138,12 @@ const NewProduct = ({ history }) => {
                   <select
                     className="form-control"
                     id="category_field"
-                    value={category}
+                    value={category.name}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
+                      <option key={category.name} value={category.name}>
+                        {category.name}
                       </option>
                     ))}
                   </select>

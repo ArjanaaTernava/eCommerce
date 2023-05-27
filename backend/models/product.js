@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -34,26 +35,11 @@ const productSchema = new mongoose.Schema({
     },
   ],
   category: {
-    type: String,
-    required: [true, "Please select category for this product"],
-    enum: {
-      values: [
-        "Electronics",
-        "Cameras",
-        "Laptops",
-        "Accessories",
-        "Headphones",
-        "Food",
-        "Books",
-        "Clothes/Shoes",
-        "Beauty/Health",
-        "Sports",
-        "Outdoor",
-        "Home",
-      ],
-      message: "Please select correct category for product",
-    },
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    default: null,
   },
+
   seller: {
     type: String,
     required: [true, "Please enter product seller"],
