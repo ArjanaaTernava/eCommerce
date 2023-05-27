@@ -28,6 +28,11 @@ import {
   orderReducer,
 } from "./reducers/orderReducers";
 
+import {
+  wishlistReducer
+} from "./reducers/wishlistReducers";
+import { getCategoriesReducer, newCategoryReducer } from "./reducers/categoryReducers";
+
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
@@ -41,12 +46,15 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   forgotPassword: forgotPasswordReducer,
   cart: cartReducer,
+  wishlist: wishlistReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   allOrders: allOrdersReducer,
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  newCategory: newCategoryReducer,
+  getCategories: getCategoriesReducer
 });
 
 let initialState = {

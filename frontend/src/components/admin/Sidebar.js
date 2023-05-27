@@ -6,6 +6,11 @@ const Sidebar = () => {
     <div className="sidebar-wrapper">
       <nav id="sidebar">
         <ul className="list-unstyled components">
+        <li>
+            <Link to="/admin/category/add">
+              <i className="fa fa-star"></i> Add Category 
+            </Link>
+          </li>
           <li>
             <Link to="/dashboard">
               <i className="fa fa-tachometer"></i> Dashboard
