@@ -50,24 +50,23 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   apiFeatures.pagination(resPerPage);
   products = await apiFeatures.query;
 
-    res.status(200).json({
-      success: true,
-      productsCount,
-      resPerPage,
-      filteredProductsCount,
-      products,
-    });
+  res.status(200).json({
+    success: true,
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
+    products,
+  });
 });
 
 // Get all products (Admin)  =>  /api/v1/admin/products
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
-
-    res.status(200).json({
-      success: true,
-      products,
-    });
+  res.status(200).json({
+    success: true,
+    products,
+  });
 });
 
 // Get single product details  =>  /api/v1/product/:id
@@ -127,7 +126,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   res.status(200).json({
