@@ -13,6 +13,7 @@ const CategorySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
     default: null,
+    required: false,
   },
   updated: {
     type: Date,

@@ -7,6 +7,11 @@ import NavigationBar from "./components/layout/NavigationBar";
 import AboutUs from "./components/layout/partials/AboutUs";
 import ContactUs from "./components/layout/partials/ContactUs";
 import Careers from "./components/layout/partials/Careers";
+import Brands from "./components/brands/Brands"
+import BrandDetails from "./components/brands/BrandDetails"
+
+
+
 
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
@@ -42,6 +47,7 @@ import ProcessOrder from "./components/admin/ProcessOrder";
 import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
+
 
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
@@ -99,6 +105,11 @@ function App() {
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
           <Route path="/careers" component={Careers} />
+          <Route path="/brands" component={Brands} exact />
+          <Route path="/brands/:id" component={BrandDetails} />
+
+
+
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
