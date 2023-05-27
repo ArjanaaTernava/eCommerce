@@ -31,6 +31,7 @@ import {
 import {
   wishlistReducer
 } from "./reducers/wishlistReducers";
+import { getCategoriesReducer, newCategoryReducer } from "./reducers/categoryReducers";
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -52,6 +53,8 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  newCategory: newCategoryReducer,
+  getCategories: getCategoriesReducer
 });
 
 let initialState = {

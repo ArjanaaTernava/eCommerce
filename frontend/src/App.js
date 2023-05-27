@@ -19,7 +19,6 @@ import Payment from "./components/cart/Payment";
 import OrderSuccess from "./components/cart/OrderSuccess";
 import Wishlist from "./components/cart/Wishlist";
 
-
 // Order Imports
 import ListOrders from "./components/order/ListOrders";
 import OrderDetails from "./components/order/OrderDetails";
@@ -53,6 +52,7 @@ import axios from "axios";
 // Payment
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import AddCategory from "./components/admin/Category";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -164,6 +164,19 @@ function App() {
           path="/admin/reviews"
           isAdmin={true}
           component={ProductReviews}
+          exact
+        />
+
+        <ProtectedRoute
+          path="/admin/category/add"
+          isAdmin={true}
+          component={AddCategory}
+          exact
+        />
+          <ProtectedRoute
+          path="/admin/categories"
+          isAdmin={true}
+          component={AddCategory} // TODO: Change component for showing categories
           exact
         />
 
