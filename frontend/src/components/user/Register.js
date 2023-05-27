@@ -10,21 +10,24 @@ import MetaData from "../layout/MetaData";
 const Register = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
   );
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-    .max(30, 'Name must not exceed 30 characters')
-    .required('Name is required'),
+      .max(30, "Name must not exceed 30 characters")
+      .required("Name is required"),
     email: Yup.string()
       .email("Invalid email address")
+      .matches(
+        /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/,
+        "Invalid email address"
+      )
       .required("Email is required"),
-      password: Yup.string()
-      .min(6, 'Password must be at least 6 characters long')
-      .required('Password is required'),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
   });
 
   const onSubmit = (values, { setSubmitting }) => {
@@ -61,11 +64,15 @@ const Register = ({ history }) => {
               name: "",
               email: "",
               password: "",
+              avatar: "/images/default_avatar.jpg",
+            }}
+            validate={(values) => {
+              console.log(values);
             }}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, setFieldValue, values: { avatar } }) => (
               <Form className="shadow-lg">
                 <h1 className="mb-3">Register</h1>
 
@@ -116,7 +123,7 @@ const Register = ({ history }) => {
                     <div>
                       <figure className="avatar mr-3 item-rtl">
                         <img
-                          src="/images/default_avatar.jpg"
+                          src={avatar}
                           className="rounded-circle"
                           alt="Avatar Preview"
                         />
@@ -129,6 +136,11 @@ const Register = ({ history }) => {
                         className="custom-file-input"
                         id="customFile"
                         accept="images/*"
+                        onChange={(event) => {
+                          const file = event.target.files[0];
+                          setFieldValue("avatar", URL.createObjectURL(file).replace("blob:", ""));
+                          console.log(URL.createObjectURL(file));
+                        }}
                       />
                       <label className="custom-file-label" htmlFor="customFile">
                         Choose Avatar
