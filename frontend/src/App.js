@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import NavigationBar from "./components/layout/NavigationBar";
+import AboutUs from "./components/layout/partials/AboutUs";
+import ContactUs from "./components/layout/partials/ContactUs";
+import Careers from "./components/layout/partials/Careers";
 
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
@@ -14,6 +17,8 @@ import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
 import OrderSuccess from "./components/cart/OrderSuccess";
+import Wishlist from "./components/cart/Wishlist";
+
 
 // Order Imports
 import ListOrders from "./components/order/ListOrders";
@@ -49,7 +54,6 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -68,15 +72,17 @@ function App() {
   const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
 
   return (
-      <div className="App">
+    <div className="App">
       <Router>
         <Header />
+        <NavigationBar />
         <div className="container container-fluid">
           <Route path="/" component={Home} exact />
           <Route path="/search/:keyword" component={Home} />
           <Route path="/product/:id" component={ProductDetails} exact />
 
           <Route path="/cart" component={Cart} exact />
+          <Route path="/wishlist" component={Wishlist} exact />
           <ProtectedRoute path="/shipping" component={Shipping} />
           <ProtectedRoute path="/confirm" component={ConfirmOrder} exact />
           <ProtectedRoute path="/success" component={OrderSuccess} />
@@ -90,6 +96,10 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/password/forgot" component={ForgotPassword} exact />
           <Route path="/password/reset/:token" component={NewPassword} exact />
+          <Route path="/aboutus" component={AboutUs} />
+          <Route path="/contactus" component={ContactUs} />
+          <Route path="/careers" component={Careers} />
+
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
           <ProtectedRoute
@@ -157,10 +167,10 @@ function App() {
           exact
         />
 
-        {!loading && (!isAuthenticated || user.role !== "admin") && <Footer />}
-        </Router>
-      </div>
-
+        {!loading && (!isAuthenticated || user.role !== "admin")}
+        <Footer />
+      </Router>
+    </div>
   );
 }
 

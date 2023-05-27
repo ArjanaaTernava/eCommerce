@@ -28,7 +28,7 @@ const Search = ({ history }) => {
             />
 
             <div className="input-group-append">
-              <button id="search-btn" className="btn">
+              <button id="search-btn" className="btn text-white">
                 <i className="fa fa-search" aria-hidden="true"></i>
               </button>
             </div>
