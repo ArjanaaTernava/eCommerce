@@ -1,5 +1,4 @@
 const User = require("../models/user");
-
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
@@ -10,11 +9,16 @@ const cloudinary = require("cloudinary");
 
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
+  let result = { public_id: null, secure_url: null };
+
+  if (req.file && req.file.path) {
+    result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+  }
+
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -160,7 +164,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-// Update user profile   =>   /api/v1/me/update
+// Update user profile => /api/v1/me/update
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
@@ -172,17 +176,20 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id);
 
     const image_id = user.avatar.public_id;
-    const res = await cloudinary.v2.uploader.destroy(image_id);
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    // Delete the existing avatar from Cloudinary
+    const imageDeleteRes = await cloudinary.v2.uploader.destroy(image_id);
+
+    // Upload the new avatar to Cloudinary
+    const uploadResult = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
       width: 150,
       crop: "scale",
     });
 
     newUserData.avatar = {
-      public_id: result.public_id,
-      url: result.secure_url,
+      public_id: uploadResult.public_id,
+      url: uploadResult.secure_url,
     };
   }
 
