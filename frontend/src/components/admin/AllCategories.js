@@ -73,12 +73,12 @@ const AllCategories = ({ history }) => {
         name: category.name,
         actions: (
           <Fragment>
-            {/* <Link
-              to={`/admin/category/${category._id}`}
+            <Link
+              to={`/admin/category/update/${category._id}`}
               className="btn btn-primary py-1 px-2"
-            > */}
-            <i className="fa fa-pencil"></i>
-            {/* </Link> */}
+            >
+              <i className="fa fa-pencil"></i>
+            </Link>
 
             <button
               className="btn btn-danger py-1 px-2 ml-2"
