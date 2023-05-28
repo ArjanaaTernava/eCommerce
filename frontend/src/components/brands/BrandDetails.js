@@ -41,7 +41,11 @@ const BrandDetails = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
-            <img src={brand.image} alt={brand.name} className="card-img-top" />
+            <img
+              src={brand.images[0].url}
+              alt={brand.name}
+              className="card-img-top"
+            />
             <div className="card-body">
               <h5 className="card-title">{brand.name}</h5>
               <p className="card-text">{brand.description}</p>
