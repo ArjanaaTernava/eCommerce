@@ -46,7 +46,6 @@ import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 import AllCategories from "./components/admin/AllCategories";
 
-
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import { useSelector } from "react-redux";
@@ -58,6 +57,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AddCategory from "./components/admin/Category";
 import AddSeller from "./components/admin/Seller";
+import UpdateCategory from "./components/admin/UpdateCategory";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -183,14 +183,20 @@ function App() {
         <ProtectedRoute
           path="/admin/categories"
           isAdmin={true}
-          component={AllCategories} // TODO: Change component for showing categories
+          component={AllCategories}
           exact
         />
-        
+
         <ProtectedRoute
           path="/admin/seller/add"
           isAdmin={true}
           component={AddSeller}
+          exact
+        />
+        <ProtectedRoute
+          path="/admin/category/update/:id"
+          isAdmin={true}
+          component={UpdateCategory}
           exact
         />
 

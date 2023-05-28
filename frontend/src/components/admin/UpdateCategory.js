@@ -2,38 +2,69 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
-import { useHistory } from "react-router-dom";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { newCategory, clearErrors } from "../../actions/categoryActions";
+import {
+  clearErrors,
+  getCategoryById,
+  updateCategory,
+} from "../../actions/categoryActions";
+import { UPDATE_CATEGORY_RESET } from "../../constants/categoryConstants";
 
-const AddCategory = () => {
+const UpdateCategory = ({ match, history }) => {
   const [name, setName] = useState("");
 
   const alert = useAlert();
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const { error, success } = useSelector((state) => state.newCategory);
+  const { error, category } = useSelector((state) => state.getCategory);
+  const { error: updateError, isUpdated } = useSelector(
+    (state) => state.category
+  );
+
+  const categoryId = match.params.id;
 
   useEffect(() => {
+    if (category && category._id !== categoryId) {
+      dispatch(getCategoryById(categoryId));
+    } else {
+      setName(category.name);
+    }
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, success]);
+
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
+    }
+
+    if (isUpdated) {
+      history.push("/admin/categories");
+      alert.success("Categories updated successfully");
+      dispatch({ type: UPDATE_CATEGORY_RESET });
+    }
+  }, [
+    dispatch,
+    alert,
+    error,
+    isUpdated,
+    history,
+    updateError,
+    category,
+    categoryId,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
 
-    dispatch(newCategory(formData));
-  };
-
-  const redirectToProducts = () => {
-    history.push("/admin/categories"); // Navigate to the specified path
+    dispatch(updateCategory(category._id, formData));
   };
 
   return (
@@ -67,19 +98,9 @@ const AddCategory = () => {
                     type="submit"
                     className="btn btn-primary btn-block py-2"
                   >
-                    ADD
+                    UPDATE
                   </button>
                 </form>
-
-                <button
-                  id="search_button"
-                  type="submit"
-                  onClick={redirectToProducts}
-                  className="btn btn-primary btn-block py-2"
-                  style={{ marginTop: '10px' }}
-                >
-                  VIEW ALL
-                </button>
               </div>
             </div>
           </Fragment>
@@ -88,5 +109,4 @@ const AddCategory = () => {
     </Fragment>
   );
 };
-
-export default AddCategory;
+export default UpdateCategory;
