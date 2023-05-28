@@ -32,6 +32,7 @@ import { wishlistReducer } from "./reducers/wishlistReducers";
 import {
   categoryReducer,
   getCategoriesReducer,
+  getCategoryReducer,
   newCategoryReducer,
 } from "./reducers/categoryReducers";
 import { newSellerReducer, getSellersReducer } from "./reducers/sellerReducers";
@@ -59,6 +60,7 @@ const reducer = combineReducers({
   category: categoryReducer,
   newCategory: newCategoryReducer,
   getCategories: getCategoriesReducer,
+  getCategory: getCategoryReducer,
   newSeller: newSellerReducer,
   getSellers: getSellersReducer,
 });
