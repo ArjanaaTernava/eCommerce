@@ -13,6 +13,9 @@ import {
   DELETE_CATEGORY_FAIL,
   DELETE_CATEGORY_REQUEST,
   DELETE_CATEGORY_SUCCESS,
+  UPDATE_CATEGORY_FAIL,
+  UPDATE_CATEGORY_REQUEST,
+  UPDATE_CATEGORY_SUCCESS,
 } from "../constants/categoryConstants";
 
 export const newCategory = (categoryData) => async (dispatch) => {
@@ -104,6 +107,35 @@ export const deleteCategory = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_CATEGORY_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Update Category (Admin)
+export const updateCategory = (id, categoryData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_CATEGORY_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/category/update/${id}`,
+      categoryData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_CATEGORY_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_CATEGORY_FAIL,
       payload: error.response.data.message,
     });
   }
