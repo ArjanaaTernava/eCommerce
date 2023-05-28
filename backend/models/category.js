@@ -9,12 +9,6 @@ const CategorySchema = new Schema({
     trim: true,
     maxLength: [100, "Product name cannot exceed 100 characters"],
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    default: null,
-    required: false,
-  },
   updated: {
     type: Date,
     default: Date.now,

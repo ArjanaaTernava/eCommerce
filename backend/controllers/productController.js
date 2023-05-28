@@ -28,7 +28,14 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
+
+  const newCategory = await Category.findOne({ name: req.body.category });
+
+  console.log(req.body);
+
+  req.body.category = newCategory;
   const product = await Product.create(req.body);
+
   // Product is created:
   res.status(201).json({
     success: true,

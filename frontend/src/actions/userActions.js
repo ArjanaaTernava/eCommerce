@@ -125,6 +125,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put("/api/v1/me/update", userData, config);
+    console.log("qetu", data);
 
     dispatch({
       type: UPDATE_PROFILE_SUCCESS,

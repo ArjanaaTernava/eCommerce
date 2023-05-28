@@ -15,9 +15,9 @@ exports.getCategories = catchAsyncErrors(async (req, res, next) => {
 
 exports.createCategory = catchAsyncErrors(async (req, res, next) => {
   const { name } = req.body;
-  const userId = req.user._id; // Add userId to category
+  // const userId = req.user._id; // Add userId to category
 
-  const category = await Category.create({ name, user: userId });
+  const category = await Category.create({ name /* user: userId */ });
   res.status(200).json({
     success: true,
     category,

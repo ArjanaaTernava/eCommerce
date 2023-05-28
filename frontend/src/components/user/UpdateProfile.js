@@ -18,6 +18,7 @@ const UpdateProfile = ({ history }) => {
   const [avatarPreview, setAvatarPreview] = useState(
     "/images/default_avatar.jpg"
   );
+  console.log('avatar',avatar)
 
   const alert = useAlert();
   const dispatch = useDispatch();

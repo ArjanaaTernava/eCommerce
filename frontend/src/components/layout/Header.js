@@ -74,7 +74,7 @@ const Header = () => {
               >
                 <figure className="avatar avatar-nav">
                   <img
-                    src={user.avatar && user.avatar.url}
+                    src={user.avatar && user.avatar?.url}
                     alt={user && user.name}
                     className="rounded-circle"
                   />

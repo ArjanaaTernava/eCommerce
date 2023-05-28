@@ -1,10 +1,12 @@
 const Product = require("../models/product");
 const Brand = require("../models/brands");
+const Category = require("../models/category")
 const dotenv = require("dotenv");
 const connectDatabase = require("../config/database");
 
 const products = require("../data/product.json");
 const brands = require("../data/brands.json");
+const categories = require("../data/categories.json")
 
 // Setting dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -34,8 +36,20 @@ const seedBrands = async () => {
     console.log(error.message);
   }
 };
+const seedCategories = async () => {
+  try {
+    await Category.deleteMany();
+    console.log("Category are deleted");
+
+    await Category.insertMany(categories);
+    console.log("All Categories are added.");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 const seedData = async () => {
+  await seedCategories();
   await seedProducts();
   await seedBrands();
   process.exit();
