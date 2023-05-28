@@ -183,7 +183,7 @@ function App() {
         <ProtectedRoute
           path="/admin/categories"
           isAdmin={true}
-          component={AllCategories} // TODO: Change component for showing categories
+          component={AllCategories}
           exact
         />
         

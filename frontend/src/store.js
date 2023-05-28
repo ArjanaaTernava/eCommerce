@@ -30,6 +30,7 @@ import {
 
 import { wishlistReducer } from "./reducers/wishlistReducers";
 import {
+  categoryReducer,
   getCategoriesReducer,
   newCategoryReducer,
 } from "./reducers/categoryReducers";
@@ -55,6 +56,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  category: categoryReducer,
   newCategory: newCategoryReducer,
   getCategories: getCategoriesReducer,
   newSeller: newSellerReducer,

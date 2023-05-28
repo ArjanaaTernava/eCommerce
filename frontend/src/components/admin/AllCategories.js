@@ -8,17 +8,22 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 
 import { useAlert } from "react-alert";
-import { getCategories, clearErrors } from "../../actions/categoryActions";
+import {
+  getCategories,
+  clearErrors,
+  deleteCategory,
+} from "../../actions/categoryActions";
 import { DELETE_CATEGORY_RESET } from "../../constants/categoryConstants";
 
-const AllCategories = () => {
+const AllCategories = ({ history }) => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, categories } = useSelector(
     (state) => state.getCategories
   );
-  // const { error: deleteError, isDeleted } = useSelector(
-  //   (state) => state.product
-  // );
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.category
+  );
 
   useEffect(() => {
     dispatch(getCategories());
@@ -27,7 +32,18 @@ const AllCategories = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      alert.success("Category deleted successfully!");
+      history.push("/admin/categories");
+      dispatch({ type: DELETE_CATEGORY_RESET });
+    }
+  }, [dispatch, error, deleteError, isDeleted, history, alert]);
 
   const setCategories = () => {
     const data = {
@@ -64,18 +80,22 @@ const AllCategories = () => {
             <i className="fa fa-pencil"></i>
             {/* </Link> */}
 
-            {/* <button
+            <button
               className="btn btn-danger py-1 px-2 ml-2"
-              onClick={() => deletecategoryHandler(category._id)}
-            > */}
-            <i className="fa fa-trash"></i>
-            {/* </button> */}
+              onClick={() => deleteCategoryHandler(category._id)}
+            >
+              <i className="fa fa-trash"></i>
+            </button>
           </Fragment>
         ),
       });
     });
 
     return data;
+  };
+
+  const deleteCategoryHandler = (id) => {
+    dispatch(deleteCategory(id));
   };
 
   return (
@@ -87,7 +107,7 @@ const AllCategories = () => {
         </div>
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Products</h1>
+            <h1 className="my-5">All Categories</h1>
 
             {loading ? (
               <Loader />
@@ -108,15 +128,3 @@ const AllCategories = () => {
 };
 
 export default AllCategories;
-
-{
-  /* <div>
-{categories && categories.length > 0 ? (
-  categories.map((category) => (
-    <div key={category._id}>{category.name}</div>
-  ))
-) : (
-  <div>No categories found.</div>
-)}
-</div> */
-}

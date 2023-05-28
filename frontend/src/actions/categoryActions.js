@@ -12,9 +12,7 @@ import {
   GET_CATEGORY_BY_ID_FAILURE,
   DELETE_CATEGORY_FAIL,
   DELETE_CATEGORY_REQUEST,
-  DELETE_CATEGORY_RESET,
   DELETE_CATEGORY_SUCCESS,
-  NEW_CATEGORY_RESET,
 } from "../constants/categoryConstants";
 
 export const newCategory = (categoryData) => async (dispatch) => {
