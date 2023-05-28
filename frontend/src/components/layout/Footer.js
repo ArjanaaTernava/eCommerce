@@ -114,6 +114,12 @@ const Footer = () => {
                     Careers
                   </a>
                 </p>
+
+                <p>
+                  <a href="/support" class="text-reset">
+                    Support
+                  </a>
+                </p>
                
               </div>
 

@@ -25,6 +25,7 @@ const order = require("./routes/order");
 const brands = require("./routes/brands");
 const categories = require("./routes/category");
 const sellers = require("./routes/seller");
+const support = require("./routes/support");
 
 app.use("/api/v1", products);
 app.use("/api/v1", auth);
@@ -33,6 +34,7 @@ app.use("/api/v1", payment);
 app.use("/api/v1", brands);
 app.use("/api/v1", categories);
 app.use("/api/v1", sellers);
+app.use("/api/v1", support);
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
