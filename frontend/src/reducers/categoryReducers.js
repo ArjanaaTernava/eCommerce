@@ -10,7 +10,6 @@ import {
 } from "../constants/categoryConstants";
 
 export const newCategoryReducer = (state = { category: [] }, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case NEW_CATEGORY_REQUEST:
       return {
