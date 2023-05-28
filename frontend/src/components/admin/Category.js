@@ -35,8 +35,7 @@ const AddCategory = () => {
   const redirectToProducts = () => {
     history.push("/admin/categories"); // Navigate to the specified path
   };
-  
-  console.log(submitHandler);
+
   return (
     <Fragment>
       <MetaData title={"Add Categories"} />
@@ -71,14 +70,16 @@ const AddCategory = () => {
                     ADD
                   </button>
                 </form>
-                
+
                 <button
-                    id="search_button"
-                    type="submit"
-                    onClick={redirectToProducts}
-                    className="btn btn-primary btn-block py-2">
-                    VIEW ALL
-                  </button>
+                  id="search_button"
+                  type="submit"
+                  onClick={redirectToProducts}
+                  className="btn btn-primary btn-block py-2"
+                  style={{ marginTop: '10px' }}
+                >
+                  VIEW ALL
+                </button>
               </div>
             </div>
           </Fragment>
