@@ -9,7 +9,12 @@ import {
   CLEAR_ERRORS,
   GET_CATEGORY_BY_ID_REQUEST,
   GET_CATEGORY_BY_ID_SUCCESS,
-  GET_CATEGORY_BY_ID_FAILURE
+  GET_CATEGORY_BY_ID_FAILURE,
+  DELETE_CATEGORY_FAIL,
+  DELETE_CATEGORY_REQUEST,
+  DELETE_CATEGORY_RESET,
+  DELETE_CATEGORY_SUCCESS,
+  NEW_CATEGORY_RESET,
 } from "../constants/categoryConstants";
 
 export const newCategory = (categoryData) => async (dispatch) => {
@@ -69,18 +74,39 @@ export const clearErrors = () => async (dispatch) => {
 export const getCategoryById = (categoryId) => async (dispatch) => {
   try {
     dispatch({ type: GET_CATEGORY_BY_ID_REQUEST });
-    
+
     const response = await axios.get(`/api/categories/${categoryId}`);
     const category = response.data;
-    
+
     dispatch({
       type: GET_CATEGORY_BY_ID_SUCCESS,
-      payload: category
+      payload: category,
     });
   } catch (error) {
     dispatch({
       type: GET_CATEGORY_BY_ID_FAILURE,
-      payload: error.message
+      payload: error.message,
+    });
+  }
+};
+
+// Delete product (Admin)
+export const deleteCategory = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_CATEGORY_REQUEST,
+    });
+
+    const { data } = await axios.delete(`/api/v1/admin/category/delete/${id}`);
+
+    dispatch({
+      type: DELETE_CATEGORY_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_CATEGORY_FAIL,
+      payload: error.response.data.message,
     });
   }
 };
