@@ -7,6 +7,9 @@ import {
   GET_CATEGORYS_FAIL,
   GET_CATEGORYS_SUCCESS,
   CLEAR_ERRORS,
+  GET_CATEGORY_BY_ID_REQUEST,
+  GET_CATEGORY_BY_ID_SUCCESS,
+  GET_CATEGORY_BY_ID_FAILURE
 } from "../constants/categoryConstants";
 
 export const newCategory = (categoryData) => async (dispatch) => {
@@ -61,4 +64,23 @@ export const getCategories = () => async (dispatch) => {
 // Clear errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const getCategoryById = (categoryId) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_CATEGORY_BY_ID_REQUEST });
+    
+    const response = await axios.get(`/api/categories/${categoryId}`);
+    const category = response.data;
+    
+    dispatch({
+      type: GET_CATEGORY_BY_ID_SUCCESS,
+      payload: category
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_CATEGORY_BY_ID_FAILURE,
+      payload: error.message
+    });
+  }
 };

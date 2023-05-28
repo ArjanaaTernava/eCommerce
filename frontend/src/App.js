@@ -44,6 +44,8 @@ import ProcessOrder from "./components/admin/ProcessOrder";
 import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
+import AllCategories from "./components/admin/AllCategories";
+
 
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
@@ -181,9 +183,10 @@ function App() {
         <ProtectedRoute
           path="/admin/categories"
           isAdmin={true}
-          component={AddCategory} // TODO: Change component for showing categories
+          component={AllCategories} // TODO: Change component for showing categories
           exact
         />
+        
         <ProtectedRoute
           path="/admin/seller/add"
           isAdmin={true}
