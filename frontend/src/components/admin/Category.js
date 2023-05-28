@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
+import { useHistory } from "react-router-dom";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const AddCategory = () => {
 
   const alert = useAlert();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { error, success } = useSelector((state) => state.newCategory);
 
@@ -30,6 +32,9 @@ const AddCategory = () => {
     dispatch(newCategory(formData));
   };
 
+  const redirectToProducts = () => {
+    history.push("/admin/categories"); // Navigate to the specified path
+  };
   
   console.log(submitHandler);
   return (
@@ -66,6 +71,14 @@ const AddCategory = () => {
                     ADD
                   </button>
                 </form>
+                
+                <button
+                    id="search_button"
+                    type="submit"
+                    onClick={redirectToProducts}
+                    className="btn btn-primary btn-block py-2">
+                    VIEW ALL
+                  </button>
               </div>
             </div>
           </Fragment>
