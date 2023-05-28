@@ -9,7 +9,7 @@ import {
   newReviewReducer,
   productReducer,
   productReviewsReducer,
-  reviewReducer
+  reviewReducer,
 } from "./reducers/productReducers";
 
 import {
@@ -28,17 +28,19 @@ import {
   orderReducer,
 } from "./reducers/orderReducers";
 
+import { wishlistReducer } from "./reducers/wishlistReducers";
 import {
-  wishlistReducer
-} from "./reducers/wishlistReducers";
-import { getCategoriesReducer, newCategoryReducer } from "./reducers/categoryReducers";
+  getCategoriesReducer,
+  newCategoryReducer,
+} from "./reducers/categoryReducers";
+import { newSellerReducer, getSellersReducer } from "./reducers/sellerReducers";
 
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   newProduct: newProductReducer,
   product: productReducer,
-  productReviews:productReviewsReducer,
+  productReviews: productReviewsReducer,
   review: reviewReducer,
   auth: authReducer,
   user: userReducer,
@@ -54,7 +56,9 @@ const reducer = combineReducers({
   order: orderReducer,
   newReview: newReviewReducer,
   newCategory: newCategoryReducer,
-  getCategories: getCategoriesReducer
+  getCategories: getCategoriesReducer,
+  newSeller: newSellerReducer,
+  getSellers: getSellersReducer,
 });
 
 let initialState = {
