@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { getCategories } from "../../actions/categoryActions";
+import { getSellers } from "../../actions/sellerActions";
 
 const NewProduct = ({ history }) => {
   const [name, setName] = useState("");
@@ -19,21 +20,18 @@ const NewProduct = ({ history }) => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-
-
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  // const categories2 = dispatch(getcategories2());
-  // console.log(categories2);
-
   const { loading, error, success } = useSelector((state) => state.newProduct);
-  const {  categories } = useSelector((state) => state.getCategories);
+  const { categories } = useSelector((state) => state.getCategories);
+  const { sellers } = useSelector((state) => state.getSellers);
 
-  console.log(categories);
+  console.log(sellers);
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(getCategories());
+    dispatch(getSellers());
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -160,6 +158,22 @@ const NewProduct = ({ history }) => {
                 </div>
 
                 <div className="form-group">
+                  <label htmlFor="seller_field">Seller</label>
+                  <select
+                    className="form-control"
+                    id="seller_field"
+                    value={seller.name}
+                    onChange={(e) => setSeller(e.target.value)}
+                  >
+                    {sellers.map((seller) => (
+                      <option key={seller.name} value={seller.name}>
+                        {seller.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* <div className="form-group">
                   <label for="seller_field">Seller Name</label>
                   <input
                     type="text"
@@ -168,7 +182,7 @@ const NewProduct = ({ history }) => {
                     value={seller}
                     onChange={(e) => setSeller(e.target.value)}
                   />
-                </div>
+                </div> */}
 
                 <div className="form-group">
                   <label>Images</label>

@@ -39,10 +39,10 @@ const productSchema = new mongoose.Schema({
     ref: "Category",
     default: null,
   },
-
   seller: {
-    type: String,
-    required: [true, "Please enter product seller"],
+    type: Schema.Types.String,
+    ref: "Seller",
+    default: null,
   },
   stock: {
     type: Number,

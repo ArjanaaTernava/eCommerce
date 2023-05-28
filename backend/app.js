@@ -23,19 +23,16 @@ const auth = require("./routes/auth");
 const payment = require("./routes/payment");
 const order = require("./routes/order");
 const brands = require("./routes/brands");
-const wishlist = require("./routes/wishlist");
 const categories = require("./routes/category");
-// console.log(categories)
+const sellers = require("./routes/seller");
 
 app.use("/api/v1", products);
 app.use("/api/v1", auth);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 app.use("/api/v1", brands);
-
-app.use("/api/v1", wishlist);
 app.use("/api/v1", categories);
-
+app.use("/api/v1", sellers);
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
