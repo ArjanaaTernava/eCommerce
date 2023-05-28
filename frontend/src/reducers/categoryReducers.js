@@ -7,6 +7,9 @@ import {
   GET_CATEGORYS_REQUEST,
   GET_CATEGORYS_SUCCESS,
   CLEAR_ERRORS,
+  GET_CATEGORY_BY_ID_REQUEST,
+  GET_CATEGORY_BY_ID_SUCCESS,
+  GET_CATEGORY_BY_ID_FAILURE
 } from "../constants/categoryConstants";
 
 export const newCategoryReducer = (state = { category: [] }, action) => {
@@ -76,6 +79,31 @@ export const getCategoriesReducer = (state = { categories: [] }, action) => {
           error: null,
         };
   
+      default:
+        return state;
+    }
+  };
+
+  export const getCategoryReducer = (state = {}, action) => {
+    switch (action.type) {
+      case GET_CATEGORY_BY_ID_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null
+        };
+      case GET_CATEGORY_BY_ID_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          category: action.payload
+        };
+      case GET_CATEGORY_BY_ID_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload
+        };
       default:
         return state;
     }
