@@ -91,30 +91,37 @@ export const getCategoriesReducer = (state = { categories: [] }, action) => {
   }
 };
 
-export const getCategoryReducer = (state = {}, action) => {
+export const getCategoryReducer = (state = { category: {} }, action) => {
   switch (action.type) {
     case GET_CATEGORY_BY_ID_REQUEST:
       return {
         ...state,
         loading: true,
-        error: null,
       };
+
     case GET_CATEGORY_BY_ID_SUCCESS:
       return {
-        ...state,
-        loading: false,
+        loading: false, //fetching from back end
         category: action.payload,
       };
+
     case GET_CATEGORY_BY_ID_FAILURE:
       return {
         ...state,
-        loading: false,
         error: action.payload,
       };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
 };
+
 
 // Handles both Delete Category and Update Category
 export const categoryReducer = (state = {}, action) => {
