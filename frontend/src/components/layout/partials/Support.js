@@ -26,8 +26,12 @@ const Support = () => {
     setQuestion("");
   };
 
+  const divStyle = {
+    marginBottom: 25
+  }
+
   return (
-    <div className="support-form-container">
+    <div className="support-form-container" style={divStyle}>
       <h2 align="center">
         <b>Support</b>
       </h2>
