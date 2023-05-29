@@ -17,6 +17,11 @@ const Support = () => {
     console.log("Submitting question:", name, email, question);
 
     dispatch(submitQuestion(name, email, question));
+
+    // Clear form fields
+    setName("");
+    setEmail("");
+    setQuestion("");
   };
 
   return (
