@@ -43,7 +43,7 @@ const UpdateCategory = ({ match, history }) => {
 
     if (isUpdated) {
       history.push("/admin/categories");
-      alert.success("Categories updated successfully");
+      alert.success("Category updated successfully");
       dispatch({ type: UPDATE_CATEGORY_RESET });
     }
   }, [
