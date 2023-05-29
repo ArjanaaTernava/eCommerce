@@ -72,21 +72,22 @@ export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
 
-export const getCategoryById = (categoryId) => async (dispatch) => {
+export const getCategoryDetails = (id) => async (dispatch) => {
   try {
-    dispatch({ type: GET_CATEGORY_BY_ID_REQUEST });
+    dispatch({
+      type: GET_CATEGORY_BY_ID_REQUEST,
+    });
 
-    const response = await axios.get(`/api/categories/${categoryId}`);
-    const category = response.data;
+    const { data } = await axios.get(`/api/v1/admin/category/${id}`);
 
     dispatch({
       type: GET_CATEGORY_BY_ID_SUCCESS,
-      payload: category,
+      payload: data.category,
     });
   } catch (error) {
     dispatch({
       type: GET_CATEGORY_BY_ID_FAILURE,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -122,12 +123,12 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-
     const { data } = await axios.put(
       `/api/v1/admin/category/update/${id}`,
       categoryData,
       config
     );
+    console.log(data);
 
     dispatch({
       type: UPDATE_CATEGORY_SUCCESS,

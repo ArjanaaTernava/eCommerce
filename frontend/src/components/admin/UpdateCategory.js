@@ -7,18 +7,17 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
-  getCategoryById,
+  getCategoryDetails,
   updateCategory,
 } from "../../actions/categoryActions";
 import { UPDATE_CATEGORY_RESET } from "../../constants/categoryConstants";
 
 const UpdateCategory = ({ match, history }) => {
-  const [name, setName] = useState("");
-
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const { error, category } = useSelector((state) => state.getCategory);
+  const [name, setName] = useState(category.name);
   const { error: updateError, isUpdated } = useSelector(
     (state) => state.category
   );
@@ -27,9 +26,9 @@ const UpdateCategory = ({ match, history }) => {
 
   useEffect(() => {
     if (category && category._id !== categoryId) {
-      dispatch(getCategoryById(categoryId));
+      dispatch(getCategoryDetails(categoryId));
     } else {
-      setName(category.name);
+      setName(category?.name);
     }
 
     if (error) {
@@ -44,7 +43,7 @@ const UpdateCategory = ({ match, history }) => {
 
     if (isUpdated) {
       history.push("/admin/categories");
-      alert.success("Categories updated successfully");
+      alert.success("Category updated successfully");
       dispatch({ type: UPDATE_CATEGORY_RESET });
     }
   }, [
