@@ -67,10 +67,7 @@ const seedData = async () => {
   await seedSellers();
   await seedProducts();
   await seedBrands();
-  process.exit();
 };
-
-seedData();
 
 module.exports = {
   seedProducts,
