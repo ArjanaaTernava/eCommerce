@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newCategory, clearErrors } from "../../actions/categoryActions";
+import { NEW_CATEGORY_RESET } from "../../constants/categoryConstants";
+
 
 const AddCategory = () => {
   const [name, setName] = useState("");
@@ -22,7 +24,12 @@ const AddCategory = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, success]);
+    if (success) {
+      history.push("/admin/categories");
+      alert.success("Category created successfully");
+      dispatch({ type: NEW_CATEGORY_RESET });
+    }
+  }, [dispatch, alert, error, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -76,7 +83,7 @@ const AddCategory = () => {
                   type="submit"
                   onClick={redirectToProducts}
                   className="btn btn-primary btn-block py-2"
-                  style={{ marginTop: '10px' }}
+                  style={{ marginTop: "10px" }}
                 >
                   VIEW ALL
                 </button>
