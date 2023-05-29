@@ -1,13 +1,14 @@
 const Product = require("../models/product");
 const Brand = require("../models/brands");
 const Category = require("../models/category");
+const Seller = require("../models/seller");
 const dotenv = require("dotenv");
 const connectDatabase = require("../config/database");
 
 const products = require("../data/product.json");
 const brands = require("../data/brands.json");
 const categories = require("../data/categories.json");
-
+const sellers = require("../data/sellers.json");
 // Setting dotenv file
 dotenv.config({ path: "backend/config/config.env" });
 
@@ -49,8 +50,32 @@ const seedCategories = async () => {
   }
 };
 
+const seedSellers = async () => {
+  try {
+    await Seller.deleteMany();
+    console.log("Sellers are deleted");
+
+    await Seller.insertMany(sellers);
+    console.log("All Sellers are added.");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const seedData = async () => {
+  await seedCategories();
+  await seedSellers();
+  await seedProducts();
+  await seedBrands();
+  process.exit();
+};
+
+seedData();
+
 module.exports = {
   seedProducts,
   seedBrands,
   seedCategories,
+  seedSellers,
+  seedData,
 };
