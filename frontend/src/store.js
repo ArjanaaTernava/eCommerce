@@ -36,6 +36,7 @@ import {
   newCategoryReducer,
 } from "./reducers/categoryReducers";
 import { newSellerReducer, getSellersReducer } from "./reducers/sellerReducers";
+import { supportReducer } from "./reducers/supportReducers";
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -63,6 +64,7 @@ const reducer = combineReducers({
   getCategory: getCategoryReducer,
   newSeller: newSellerReducer,
   getSellers: getSellersReducer,
+  support: supportReducer,
 });
 
 let initialState = {

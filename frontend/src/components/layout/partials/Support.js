@@ -14,6 +14,7 @@ const Support = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submitting question:", name, email, question);
 
     dispatch(submitQuestion(name, email, question));
   };
