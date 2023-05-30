@@ -11,7 +11,6 @@ import {
   newReview,
 } from "../../actions/productActions";
 import { addItemToCart } from "../../actions/cartActions";
-import {addToWishlist} from "../../actions/wishlistActions";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductDetails = ({ match }) => {
@@ -54,10 +53,7 @@ const ProductDetails = ({ match }) => {
     alert.success(`Item Added to Cart`);
   };
 
-  const addToWishlistHandler = () => {
-    dispatch(addToWishlist(match.params.id)); // Pass the productId as an argument
-    alert.success("Item Added to Wishlist");
-  };
+
   
 
   const increaseQty = () => {
@@ -189,14 +185,6 @@ const ProductDetails = ({ match }) => {
                 onClick={addToCart}
               >
                 Add to Cart
-              </button>
-              <button
-                type="button"
-                id="cart_btn"
-                className="btn btn-primary d-inline ml-4"
-                onClick={addToWishlistHandler}
-              >
-                Add to Wishlist
               </button>
 
               <hr />

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logout } from "../../actions/userActions";
@@ -12,7 +12,7 @@ const Header = () => {
 
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
-  const { wishlistItems } = useSelector((state) => state.wishlist);
+
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -48,19 +48,6 @@ const Header = () => {
               {cartItems.length}
             </span>
           </Link>
-          <NavLink
-            to="/wishlist"
-            style={{ textDecoration: "none" }}
-            activeClassName="active"
-          >
-            <span id="cart" className="ml-3">
-              Wishlist
-            </span>
-            <span className="ml-1" id="cart_count">
-              {wishlistItems.length}
-            </span>
-          </NavLink>
-
           {user ? (
             <div className="ml-4 dropdown d-inline">
               <Link
