@@ -58,6 +58,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import AddCategory from "./components/admin/Category";
 import AddSeller from "./components/admin/Seller";
 import UpdateCategory from "./components/admin/UpdateCategory";
+import AllSellers from "./components/admin/AllSellers";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -189,15 +190,23 @@ function App() {
         />
 
         <ProtectedRoute
+          path="/admin/category/update/:id"
+          isAdmin={true}
+          component={UpdateCategory}
+          exact
+        />
+
+        <ProtectedRoute
           path="/admin/seller/add"
           isAdmin={true}
           component={AddSeller}
           exact
         />
+
         <ProtectedRoute
-          path="/admin/category/update/:id"
+          path="/admin/sellers"
           isAdmin={true}
-          component={UpdateCategory}
+          component={AllSellers}
           exact
         />
 
