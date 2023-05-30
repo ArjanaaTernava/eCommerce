@@ -38,6 +38,7 @@ import {
   newSellerReducer,
   getSellersReducer,
   sellerReducer,
+  getSellerReducer,
 } from "./reducers/sellerReducers";
 import { supportReducer } from "./reducers/supportReducers";
 
@@ -68,6 +69,7 @@ const reducer = combineReducers({
   getSellers: getSellersReducer,
   seller: sellerReducer,
   support: supportReducer,
+  getSeller:getSellerReducer
 });
 
 let initialState = {
