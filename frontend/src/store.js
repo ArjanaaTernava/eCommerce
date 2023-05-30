@@ -35,7 +35,11 @@ import {
   getCategoryReducer,
   newCategoryReducer,
 } from "./reducers/categoryReducers";
-import { newSellerReducer, getSellersReducer } from "./reducers/sellerReducers";
+import {
+  newSellerReducer,
+  getSellersReducer,
+  sellerReducer,
+} from "./reducers/sellerReducers";
 import { supportReducer } from "./reducers/supportReducers";
 
 const reducer = combineReducers({
@@ -64,6 +68,7 @@ const reducer = combineReducers({
   getCategory: getCategoryReducer,
   newSeller: newSellerReducer,
   getSellers: getSellersReducer,
+  seller: sellerReducer,
   support: supportReducer,
 });
 
