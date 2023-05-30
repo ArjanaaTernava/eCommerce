@@ -108,3 +108,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Testing
+test/reports/
+test/coverage/

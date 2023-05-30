@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Samsung",
+        "images": [
+            {
+                "public_id": "brands/Samsung-Logo-2_uyr3wu",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685231975/brands/Samsung-Logo-2_uyr3wu.png"
+            }
+        ],
+        "description": "Samsung is a multinational conglomerate known for its wide range of consumer electronics and mobile devices. With a rich history dating back to 1938, Samsung has become one of the leading brands in the technology industry. From smartphones and tablets to televisions and home appliances, Samsung offers innovative and high-quality products that cater to various needs and preferences of consumers worldwide."
+    },
+    {
+        "name": "Apple",
+        "images": [
+            {
+                "public_id": "brands/v1685225289/brands/Apple-Logo_rxe98x",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685225289/brands/Apple-Logo_rxe98x.png"
+            }
+        ],
+        "description": "Apple Inc. is an American multinational technology company that designs, manufactures, and sells a range of consumer electronics, software, and online services. Founded in 1976, Apple is known for its iconic products such as the iPhone, iPad, Mac, and Apple Watch. With a focus on user experience and sleek design, Apple products have gained a dedicated following and are synonymous with innovation and cutting-edge technology."
+    },
+    {
+        "name": "MSI",
+        "images": [
+            {
+                "public_id": "brands/MSI-Logo_xw7saf",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685225318/brands/MSI-Logo_xw7saf.png"
+            }
+        ],
+        "description": "MSI (Micro-Star International) is a leading manufacturer of gaming laptops, desktops, motherboards, graphics cards, and other gaming peripherals. Established in 1986, MSI has built a reputation for delivering high-performance gaming hardware that caters to the needs of gamers worldwide. With a commitment to innovation, quality, and reliability, MSI products offer immersive gaming experiences and exceptional performance for both casual and professional gamers."
+    },
+    {
+        "name": "Lenovo",
+        "images": [
+            {
+                "public_id": "brands/Lenovo-Logo-1_ogrwhg",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685225347/brands/Lenovo-Logo-1_ogrwhg.png"
+            }
+        ],
+        "description": "Lenovo is a global technology company that designs, develops, and manufactures a wide range of products, including laptops, desktops, tablets, smartphones, and servers. With a strong focus on innovation and customer-centric solutions, Lenovo aims to deliver smarter technology for all. From its legendary ThinkPad laptops to its versatile Yoga series, Lenovo provides reliable and feature-rich devices that empower individuals and businesses to achieve more."
+    },
+    {
+        "name": "SteelSeries",
+        "images": [
+            {
+                "public_id": "brands/Steelseries-logo_t38v2b",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685225372/brands/Steelseries-logo_t38v2b.png"
+            }
+        ],
+        "description": "SteelSeries is a leading brand in gaming peripherals and accessories. With a focus on delivering premium-quality products designed specifically for gamers, SteelSeries offers a wide range of gaming headsets, keyboards, mice, mousepads, and controllers. Known for their exceptional build quality, advanced features, and ergonomic designs, SteelSeries products enhance the gaming experience and provide gamers with a competitive edge."
+    },
+    {
+        "name": "Zowie",
+        "images": [
+            {
+                "public_id": "brands/Zowie_Logo_pua0nl",
+                "url": "https://res.cloudinary.com/projekti/image/upload/v1685232759/brands/Zowie_Logo_pua0nl.png"
+            }
+        ],
+        "description": "Zowie is a brand dedicated to providing professional gaming gear to esports enthusiasts and competitive gamers. Founded in 2008, Zowie focuses on creating high-performance gaming mice, monitors, and accessories that are optimized for precision, accuracy, and responsiveness. With a strong emphasis on functionality and simplicity, Zowie products are trusted by professional gamers around the world."
+    }
+]

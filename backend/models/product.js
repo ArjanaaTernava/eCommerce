@@ -35,14 +35,14 @@ const productSchema = new mongoose.Schema({
     },
   ],
   category: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.String,
     ref: "Category",
     default: null,
   },
-
   seller: {
-    type: String,
-    required: [true, "Please enter product seller"],
+    type: Schema.Types.String,
+    ref: "Seller",
+    default: null,
   },
   stock: {
     type: Number,

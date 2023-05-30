@@ -7,9 +7,11 @@ import NavigationBar from "./components/layout/NavigationBar";
 import AboutUs from "./components/layout/partials/AboutUs";
 import ContactUs from "./components/layout/partials/ContactUs";
 import Careers from "./components/layout/partials/Careers";
-
+import Brands from "./components/brands/Brands";
+import BrandDetails from "./components/brands/BrandDetails";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
+import Support from "./components/layout/partials/Support";
 
 // Cart Imports
 import Cart from "./components/cart/Cart";
@@ -42,6 +44,7 @@ import ProcessOrder from "./components/admin/ProcessOrder";
 import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
+import AllCategories from "./components/admin/AllCategories";
 
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
@@ -53,6 +56,8 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AddCategory from "./components/admin/Category";
+import AddSeller from "./components/admin/Seller";
+import UpdateCategory from "./components/admin/UpdateCategory";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -99,6 +104,9 @@ function App() {
           <Route path="/aboutus" component={AboutUs} />
           <Route path="/contactus" component={ContactUs} />
           <Route path="/careers" component={Careers} />
+          <Route path="/brands" component={Brands} exact />
+          <Route path="/brands/:id" component={BrandDetails} />
+          <Route path="/support" component={Support} />
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
@@ -173,10 +181,23 @@ function App() {
           component={AddCategory}
           exact
         />
-          <ProtectedRoute
+        <ProtectedRoute
           path="/admin/categories"
           isAdmin={true}
-          component={AddCategory} // TODO: Change component for showing categories
+          component={AllCategories}
+          exact
+        />
+
+        <ProtectedRoute
+          path="/admin/seller/add"
+          isAdmin={true}
+          component={AddSeller}
+          exact
+        />
+        <ProtectedRoute
+          path="/admin/category/update/:id"
+          isAdmin={true}
+          component={UpdateCategory}
           exact
         />
 

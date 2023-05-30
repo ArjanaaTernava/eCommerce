@@ -1,10 +1,12 @@
-import React, { Fragment } from "react";
 import { useGlobalContext } from "../../context";
+import React, { Fragment} from "react";
+import { Link } from "react-router-dom";
 const Footer = () => {
   const { footerYear } = useGlobalContext();
-
+  
   return (
     <Fragment>
+      <Link to={`/brands/`} className="card-link">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav navbaricons">
             <li className="nav-item ">
@@ -57,6 +59,7 @@ const Footer = () => {
             </li>
           </ul>
       </nav>
+    </Link>
       <footer className="py-1">
         <section class="">
           <div class="container text-center text-md-start mt-5">
@@ -109,6 +112,12 @@ const Footer = () => {
                 <p>
                   <a href="/careers" class="text-reset">
                     Careers
+                  </a>
+                </p>
+
+                <p>
+                  <a href="/support" class="text-reset">
+                    Support
                   </a>
                 </p>
                

@@ -7,8 +7,11 @@
     "start": "SET node backend/server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
-    "seeder": "node backend/utils/seeder.js",
-    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
+    "seeder": "node backend/utils/seederRunner.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend",
+    "test:unit": "mocha --exit backend/tests/unit/**/*.test.js",
+    "test:integration": "mocha --exit backend/tests/integration/**/*.test.js",
+    "test": "npm run test:unit && npm run test:integration"
   },
   "repository": {
     "type": "git",
@@ -25,7 +28,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.23.0",
-    "cookie-parser": "^1.4.5",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
@@ -39,6 +42,11 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemailer-mock": "^2.0.1",
+    "nodemon": "^2.0.6",
+    "nyc": "^15.1.0",
+    "sinon": "^15.1.0"
   }
 }

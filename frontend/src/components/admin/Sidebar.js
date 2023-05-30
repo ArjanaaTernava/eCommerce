@@ -6,9 +6,14 @@ const Sidebar = () => {
     <div className="sidebar-wrapper">
       <nav id="sidebar">
         <ul className="list-unstyled components">
-        <li>
+          <li>
             <Link to="/admin/category/add">
-              <i className="fa fa-star"></i> Add Category 
+              <i className="fa fa-star"></i> Add Category
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/seller/add">
+              <i className="fa fa-star"></i> Add Seller
             </Link>
           </li>
           <li>
