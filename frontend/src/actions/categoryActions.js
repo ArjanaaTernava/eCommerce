@@ -34,8 +34,6 @@ export const newCategory = (categoryData) => async (dispatch) => {
       config
     );
 
-    console.log(data);
-
     dispatch({
       type: NEW_CATEGORY_SUCCESS,
       payload: data,
@@ -62,7 +60,7 @@ export const getCategories = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_CATEGORYS_FAIL,
-      payload: error.response.data.message,
+      payload: error,
     });
   }
 };
