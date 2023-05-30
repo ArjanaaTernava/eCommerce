@@ -9,7 +9,9 @@
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
     "seeder": "node backend/utils/seederRunner.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend",
-    "test": "mocha --exit backend/tests/unit/**/*.test.js"
+    "test:unit": "mocha --exit backend/tests/unit/**/*.test.js",
+    "test:integration": "mocha --exit backend/tests/integration/**/*.test.js",
+    "test": "npm run test:unit && npm run test:integration"
   },
   "repository": {
     "type": "git",
