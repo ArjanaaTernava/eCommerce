@@ -13,6 +13,9 @@ import {
   UPDATE_SELLER_REQUEST,
   UPDATE_SELLER_SUCCESS,
   CLEAR_ERRORS,
+ GET_SELLER_BY_ID_FAILURE,
+ GET_SELLER_BY_ID_REQUEST,
+ GET_SELLER_BY_ID_SUCCESS
 } from "../constants/sellerConstants";
 
 export const newSeller = (sellerData) => async (dispatch) => {
@@ -116,4 +119,24 @@ export const updateSeller = (id, sellerData) => async (dispatch) => {
 // Clear errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const getSellerDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_SELLER_BY_ID_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/v1/admin/seller/${id}`);
+
+    dispatch({
+      type: GET_SELLER_BY_ID_SUCCESS,
+      payload: data.seller,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_SELLER_BY_ID_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
 };

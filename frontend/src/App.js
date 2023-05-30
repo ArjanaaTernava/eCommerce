@@ -58,6 +58,8 @@ import AddCategory from "./components/admin/Category";
 import AddSeller from "./components/admin/Seller";
 import UpdateCategory from "./components/admin/UpdateCategory";
 import AllSellers from "./components/admin/AllSellers";
+import UpdateSeller from "./components/admin/UpdateSeller";
+
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -205,6 +207,14 @@ function App() {
           path="/admin/sellers"
           isAdmin={true}
           component={AllSellers}
+          exact
+        />
+
+        
+        <ProtectedRoute
+          path="/admin/seller/update/:id"
+          isAdmin={true}
+          component={UpdateSeller}
           exact
         />
 
