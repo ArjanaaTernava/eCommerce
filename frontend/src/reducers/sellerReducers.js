@@ -15,6 +15,9 @@ import {
   UPDATE_SELLER_RESET,
   UPDATE_SELLER_SUCCESS,
   CLEAR_ERRORS,
+  GET_SELLER_BY_ID_REQUEST,
+  GET_SELLER_BY_ID_SUCCESS,
+  GET_SELLER_BY_ID_FAILURE,
 } from "../constants/sellerConstants";
 
 export const newSellerReducer = (state = { seller: [] }, action) => {
@@ -131,6 +134,37 @@ export const sellerReducer = (state = {}, action) => {
         isUpdated: false,
       };
     }
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const getSellerReducer = (state = { seller: {} }, action) => {
+  switch (action.type) {
+    case GET_SELLER_BY_ID_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case GET_SELLER_BY_ID_SUCCESS:
+      return {
+        loading: false, //fetching from back end
+        seller: action.payload,
+      };
+
+    case GET_SELLER_BY_ID_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
 
     case CLEAR_ERRORS:
       return {
