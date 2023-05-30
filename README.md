@@ -1,7 +1,8 @@
 # eCommerce Project - eBlej
 
-This project is done using [React](https://reactjs.org/) and [Create React App](https://create-react-app.dev/) for compiling & bundling, also using MongoDB, a popular NoSQL database. 
+This project is done using [React](https://reactjs.org/) and [Create React App](https://create-react-app.dev/) for compiling & bundling, also using [MongoDB](https://www.mongodb.com/), a popular NoSQL database and [Node.js](https://nodejs.org/en) for the server side development.
 - ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/-Prettier-F7B93E?logo=prettier&logoColor=white&style=for-the-badge) ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white&style=for-the-badge)
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
 
 
 ## Getting Started
@@ -54,6 +55,13 @@ To get a local copy up and running follow these simple example steps.
 
 #### Seed the database
 - `npm run seeder`
+
+
+##### Authors:
+- [Albin Hashani](https://github.com/AlbinHashanii)
+- [Ardit Zubaku](https://github.com/ArditZubaku)
+- [Arjana Tërnava](https://github.com/ArjanaaTernava)
+- [Erza Osmani](https://github.com/erzaosmani)
 
 
 
