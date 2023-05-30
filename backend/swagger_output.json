@@ -13,6 +13,9 @@
   "paths": {
     "/brands": {
       "get": {
+        "tags": [
+          "Brands"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -25,6 +28,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Brands"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -39,6 +45,9 @@
     },
     "/brands/{id}": {
       "get": {
+        "tags": [
+          "Brands"
+        ],
         "description": "",
         "parameters": [
           {
@@ -63,6 +72,9 @@
     },
     "/register": {
       "post": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -92,6 +104,9 @@
     },
     "/login": {
       "post": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -115,6 +130,9 @@
     },
     "/password/forgot": {
       "post": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -139,6 +157,9 @@
     },
     "/password/reset/{token}": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -168,6 +189,9 @@
     },
     "/logout": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -179,6 +203,9 @@
     },
     "/me": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -190,6 +217,9 @@
     },
     "/password/update": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -213,6 +243,9 @@
     },
     "/me/update": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -243,6 +276,9 @@
     },
     "/admin/users": {
       "get": {
+        "tags": [
+          "Admin"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -254,6 +290,9 @@
     },
     "/admin/user/{id}": {
       "get": {
+        "tags": [
+          "Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -272,6 +311,9 @@
     },
     "/admin/update/user/{id}": {
       "put": {
+        "tags": [
+          "Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -308,6 +350,9 @@
     },
     "/admin/delete/user/{id}": {
       "delete": {
+        "tags": [
+          "Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -326,6 +371,9 @@
     },
     "/admin/categories": {
       "get": {
+        "tags": [
+          "Category/Admin"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -337,6 +385,9 @@
     },
     "/admin/category/{id}": {
       "get": {
+        "tags": [
+          "Category/Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -355,6 +406,9 @@
     },
     "/admin/category/add": {
       "post": {
+        "tags": [
+          "Category/Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -379,6 +433,9 @@
     },
     "/admin/category/delete/{id}": {
       "delete": {
+        "tags": [
+          "Category/Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -397,6 +454,9 @@
     },
     "/admin/category/update/{id}": {
       "put": {
+        "tags": [
+          "Category/Admin"
+        ],
         "description": "",
         "parameters": [
           {
@@ -415,6 +475,9 @@
     },
     "/order/new": {
       "post": {
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -457,6 +520,9 @@
     },
     "/order/{id}": {
       "get": {
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -475,6 +541,9 @@
     },
     "/orders/me": {
       "get": {
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -486,6 +555,9 @@
     },
     "/admin/orders": {
       "get": {
+        "tags": [
+          "Admin/Order"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -496,7 +568,10 @@
       }
     },
     "/admin/update/order/{id}": {
-      "put": {
+      "put": {        
+        "tags": [
+        "Admin/Order"
+      ],
         "description": "",
         "parameters": [
           {
@@ -527,6 +602,9 @@
     },
     "/admin/delete/order/{id}": {
       "delete": {
+        "tags": [
+          "Admin/Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -545,6 +623,9 @@
     },
     "/payment/process": {
       "post": {
+        "tags": [
+          "Payment"
+        ],
         "description": "",
         "parameters": [
           {
@@ -569,6 +650,9 @@
     },
     "/stripeapi": {
       "get": {
+        "tags": [
+          "Payment"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -580,6 +664,9 @@
     },
     "/products": {
       "get": {
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -591,6 +678,9 @@
     },
     "/admin/products": {
       "get": {
+        "tags": [
+          "Admin/Product"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -602,6 +692,9 @@
     },
     "/product/{id}": {
       "get": {
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -620,6 +713,9 @@
     },
     "/admin/product/new": {
       "post": {
+        "tags": [
+          "Admin/Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -647,6 +743,9 @@
     },
     "/admin/update/product/{id}": {
       "put": {
+        "tags": [
+          "Admin/Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -677,6 +776,9 @@
     },
     "/admin/delete/product/{id}": {
       "delete": {
+        "tags": [
+          "Admin/Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -695,6 +797,9 @@
     },
     "/review/new": {
       "put": {
+        "tags": [
+          "Review"
+        ],
         "description": "",
         "parameters": [
           {
@@ -725,6 +830,9 @@
     },
     "/reviews": {
       "get": {
+        "tags": [
+          "Review"
+        ],
         "description": "",
         "parameters": [
           {
@@ -742,6 +850,9 @@
     },
     "/reviews/delete": {
       "delete": {
+        "tags": [
+          "Review"
+        ],
         "description": "",
         "parameters": [
           {
@@ -764,6 +875,9 @@
     },
     "/qna": {
       "get": {
+        "tags": [
+          "QnA"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -773,6 +887,9 @@
         }
       },
       "post": {
+        "tags": [
+          "QnA"
+        ],
         "description": "",
         "parameters": [
           {
@@ -800,6 +917,9 @@
     },
     "/qna/{id}": {
       "get": {
+        "tags": [
+          "QnA"
+        ],
         "description": "",
         "parameters": [
           {
@@ -816,6 +936,9 @@
         }
       },
       "put": {
+        "tags": [
+          "QnA"
+        ],
         "description": "",
         "parameters": [
           {
@@ -831,7 +954,10 @@
           }
         }
       },
-      "delete": {
+      "delete": {  
+        "tags": [
+        "QnA"
+      ],
         "description": "",
         "parameters": [
           {
@@ -850,6 +976,9 @@
     },
     "/admin/seller/add": {
       "post": {
+        "tags": [
+          "Admin/Seller"
+        ],
         "description": "",
         "parameters": [
           {
@@ -874,6 +1003,9 @@
     },
     "/admin/sellers": {
       "get": {
+        "tags": [
+          "Admin/Seller"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -885,6 +1017,9 @@
     },
     "/admin/seller/{id}": {
       "get": {
+        "tags": [
+          "Admin/Seller"
+        ],
         "description": "",
         "parameters": [
           {
@@ -903,6 +1038,9 @@
     },
     "/support": {
       "post": {
+        "tags": [
+          "Support"
+        ],
         "description": "",
         "parameters": [
           {
