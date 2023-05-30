@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-/* Import endpoint handlers */
 const {
   getBrands,
   getBrandById,
@@ -75,7 +74,6 @@ const { submitQuestion } = require("../controllers/supportController");
 
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
-/* Define endpoint routes */
 router.route("/brands").get(getBrands);
 router.route("/brands/:id").get(getBrandById);
 router.route("/brands").post(createBrand);
@@ -124,11 +122,9 @@ router.route("/qna/:id").get(getQnAById).put(updateQnA).delete(deleteQnA);
 router.route("/qna").get(getAllQnA).post(createQnA);
 router.route("/qna/:id").get(getQnAById).put(updateQnA).delete(deleteQnA);
 
-
 router.route("/admin/seller/add").post(isAuthenticatedUser, createSeller);
 router.route("/admin/sellers").get(isAuthenticatedUser, getSellers);
 router.route("/admin/seller/:id").get(isAuthenticatedUser, getSellerById);
-
 
 router.route("/support").post(submitQuestion);
 
