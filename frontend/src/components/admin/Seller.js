@@ -5,12 +5,10 @@ import Sidebar from "./Sidebar";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  newSeller,
-  clearErrors,
-} from "../../actions/sellerActions";
+import { newSeller, clearErrors } from "../../actions/sellerActions";
+import { NEW_SELLER_RESET } from "../../constants/sellerConstants";
 
-const AddSeller = () => {
+const AddSeller = ({ history }) => {
   const [name, setName] = useState("");
 
   const alert = useAlert();
@@ -23,7 +21,12 @@ const AddSeller = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, success]);
+    if (success) {
+      history.push("/admin/sellers");
+      alert.success("Seller created successfully");
+      dispatch({ type: NEW_SELLER_RESET });
+    }
+  }, [dispatch, alert, error, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,7 +36,10 @@ const AddSeller = () => {
     dispatch(newSeller(formData));
   };
 
-  console.log(submitHandler);
+  const redirectToSellers = () => {
+    history.push("/admin/sellers");
+  };
+
   return (
     <Fragment>
       <MetaData title={"Add Sellers"} />
@@ -66,6 +72,16 @@ const AddSeller = () => {
                     className="btn btn-primary btn-block py-2"
                   >
                     ADD
+                  </button>
+
+                  <button
+                    id="search_button"
+                    type="submit"
+                    onClick={redirectToSellers}
+                    className="btn btn-primary btn-block py-2"
+                    style={{ marginTop: "10px" }}
+                  >
+                    VIEW ALL
                   </button>
                 </form>
               </div>
