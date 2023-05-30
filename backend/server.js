@@ -1,7 +1,7 @@
 const app = require("./app");
 const connectDatabase = require("./config/database");
-const swaggerSetup = require("./utils/swagger");
-
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 // const dotenv = require('dotenv');
 const cloudinary = require("cloudinary");
@@ -30,7 +30,8 @@ cloudinary.config({
 });
 
 // Swagger setup
-swaggerSetup();
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
@@ -46,3 +47,5 @@ process.on("unhandledRejection", (err) => {
     process.exit(1);
   });
 });
+
+require('./controllers/endpoints')
