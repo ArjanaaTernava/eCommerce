@@ -40,10 +40,6 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  wishlist: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Wishlist',
-  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
