@@ -22,27 +22,25 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
 });
 
 function addTagsToPaths(swaggerDoc) {
-  // console.log(Object.keys(swaggerDoc.paths));
+  const tags = getTagForEndpoint();
   for (const path in swaggerDoc.paths) {
     const endpoint = swaggerDoc.paths[path];
     for (const method in endpoint) {
       const operation = endpoint[method];
-      console.log(operation);
-      for (value of getTagForEndpoint()) {
-        const emptyArr = [];
-        emptyArr.push(value);
-        operation.tags = emptyArr;
-        require("fs").writeFileSync(
-          "backend/utils/swagger_output.json",
-          JSON.stringify(swaggerDoc, null, 2)
-        );
+      for (const tag of tags) {
+        if (path.startsWith(`/${tag}`)) {
+          operation.tags = [tag.charAt(0).toUpperCase() + tag.slice(1)];
+          require("fs").writeFileSync(
+            "backend/utils/swagger_output.json",
+            JSON.stringify(swaggerDoc, null, 2)
+          );
+        }
       }
     }
   }
 }
 
 function getTagForEndpoint() {
-  // console.log(path);
   const swaggerDoc = require(outputFile);
   const endpoints = Object.keys(swaggerDoc.paths);
   const uniqueEndponts = Array.from(

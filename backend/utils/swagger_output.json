@@ -22,7 +22,10 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "tags": [
+          "Brands"
+        ]
       },
       "post": {
         "description": "",
@@ -34,7 +37,10 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "tags": [
+          "Brands"
+        ]
       }
     },
     "/brands/{id}": {
@@ -58,7 +64,10 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "tags": [
+          "Brands"
+        ]
       }
     },
     "/register": {
@@ -87,7 +96,10 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {},
+        "tags": [
+          "Register"
+        ]
       }
     },
     "/login": {
@@ -110,7 +122,10 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {},
+        "tags": [
+          "Login"
+        ]
       }
     },
     "/password/forgot": {
@@ -134,7 +149,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Password"
+        ]
       }
     },
     "/password/reset/{token}": {
@@ -163,7 +181,10 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {},
+        "tags": [
+          "Password"
+        ]
       }
     },
     "/logout": {
@@ -174,7 +195,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Logout"
+        ]
       }
     },
     "/me": {
@@ -185,7 +209,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Me"
+        ]
       }
     },
     "/password/update": {
@@ -208,7 +235,10 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {},
+        "tags": [
+          "Password"
+        ]
       }
     },
     "/me/update": {
@@ -238,7 +268,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Me"
+        ]
       }
     },
     "/admin/users": {
@@ -249,7 +282,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/user/{id}": {
@@ -267,7 +303,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/update/user/{id}": {
@@ -303,7 +342,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/delete/user/{id}": {
@@ -321,7 +363,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/categories": {
@@ -332,7 +377,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/category/{id}": {
@@ -350,7 +398,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/category/add": {
@@ -374,7 +425,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/category/delete/{id}": {
@@ -392,7 +446,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/category/update/{id}": {
@@ -410,7 +467,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/order/new": {
@@ -452,7 +512,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Order"
+        ]
       }
     },
     "/order/{id}": {
@@ -470,7 +533,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Order"
+        ]
       }
     },
     "/orders/me": {
@@ -481,10 +547,13 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Orders"
+        ]
       }
     },
-    "/admin/orders": {
+    "/admin/orders/": {
       "get": {
         "description": "",
         "parameters": [],
@@ -492,7 +561,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/update/order/{id}": {
@@ -522,7 +594,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/delete/order/{id}": {
@@ -540,7 +615,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/payment/process": {
@@ -564,7 +642,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Payment"
+        ]
       }
     },
     "/stripeapi": {
@@ -575,7 +656,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Stripeapi"
+        ]
       }
     },
     "/products": {
@@ -586,7 +670,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Product"
+        ]
       }
     },
     "/admin/products": {
@@ -597,7 +684,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/product/{id}": {
@@ -615,7 +705,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Product"
+        ]
       }
     },
     "/admin/product/new": {
@@ -642,7 +735,10 @@
           "201": {
             "description": "Created"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/update/product/{id}": {
@@ -672,7 +768,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/delete/product/{id}": {
@@ -690,7 +789,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/review/new": {
@@ -720,7 +822,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Review"
+        ]
       }
     },
     "/reviews": {
@@ -737,7 +842,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       }
     },
     "/reviews/delete": {
@@ -759,7 +867,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       }
     },
     "/qna": {
@@ -770,7 +881,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Qna"
+        ]
       },
       "post": {
         "description": "",
@@ -795,7 +909,10 @@
           "201": {
             "description": "Created"
           }
-        }
+        },
+        "tags": [
+          "Qna"
+        ]
       }
     },
     "/qna/{id}": {
@@ -813,7 +930,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Qna"
+        ]
       },
       "put": {
         "description": "",
@@ -829,7 +949,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Qna"
+        ]
       },
       "delete": {
         "description": "",
@@ -845,7 +968,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Qna"
+        ]
       }
     },
     "/admin/seller/add": {
@@ -869,7 +995,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/sellers": {
@@ -880,7 +1009,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/admin/seller/{id}": {
@@ -898,7 +1030,10 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Admin"
+        ]
       }
     },
     "/support": {
@@ -931,7 +1066,10 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "tags": [
+          "Support"
+        ]
       }
     }
   }
