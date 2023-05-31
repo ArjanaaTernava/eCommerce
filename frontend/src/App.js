@@ -12,6 +12,7 @@ import BrandDetails from "./components/brands/BrandDetails";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Support from "./components/layout/partials/Support";
+import QnA from "./components/QnA/QnA";
 
 // Cart Imports
 import Cart from "./components/cart/Cart";
@@ -107,6 +108,8 @@ function App() {
           <Route path="/brands" component={Brands} exact />
           <Route path="/brands/:id" component={BrandDetails} />
           <Route path="/support" component={Support} />
+          <Route path="/qna" component={QnA} />
+
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
