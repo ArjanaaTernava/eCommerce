@@ -30,7 +30,7 @@ Before getting started, make sure you have the following software installed:
 
 | Name               | Description                                                                                        |
 | ------------------ | -----------------------------------------------------------------------------------------------    |
-| **public/**        | Static assets (imgages).                                                                           |
+| **public/**        | Static assets (images).                                                                            |
 | **src/components** | React components that are used for specific pages.                                                 |
 | **src/actions**    | Indicate what can possibly be done to the states.                                                  |
 | **src/reducers**   | Indicate transformations of the states.                                                            |
