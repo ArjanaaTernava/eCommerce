@@ -2,20 +2,17 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
-import { useHistory } from "react-router-dom";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newCategory, clearErrors } from "../../actions/categoryActions";
 import { NEW_CATEGORY_RESET } from "../../constants/categoryConstants";
 
-
-const AddCategory = () => {
+const AddCategory = ({ history }) => {
   const [name, setName] = useState("");
 
   const alert = useAlert();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { error, success } = useSelector((state) => state.newCategory);
 
@@ -40,7 +37,7 @@ const AddCategory = () => {
   };
 
   const redirectToProducts = () => {
-    history.push("/admin/categories"); // Navigate to the specified path
+    history.push("/admin/categories");
   };
 
   return (

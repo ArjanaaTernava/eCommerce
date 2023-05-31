@@ -19,7 +19,6 @@ import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
 import OrderSuccess from "./components/cart/OrderSuccess";
-import Wishlist from "./components/cart/Wishlist";
 
 // Order Imports
 import ListOrders from "./components/order/ListOrders";
@@ -58,6 +57,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import AddCategory from "./components/admin/Category";
 import AddSeller from "./components/admin/Seller";
 import UpdateCategory from "./components/admin/UpdateCategory";
+import AllSellers from "./components/admin/AllSellers";
+import UpdateSeller from "./components/admin/UpdateSeller";
+
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -87,7 +89,6 @@ function App() {
           <Route path="/product/:id" component={ProductDetails} exact />
 
           <Route path="/cart" component={Cart} exact />
-          <Route path="/wishlist" component={Wishlist} exact />
           <ProtectedRoute path="/shipping" component={Shipping} />
           <ProtectedRoute path="/confirm" component={ConfirmOrder} exact />
           <ProtectedRoute path="/success" component={OrderSuccess} />
@@ -189,15 +190,31 @@ function App() {
         />
 
         <ProtectedRoute
+          path="/admin/category/update/:id"
+          isAdmin={true}
+          component={UpdateCategory}
+          exact
+        />
+
+        <ProtectedRoute
           path="/admin/seller/add"
           isAdmin={true}
           component={AddSeller}
           exact
         />
+
         <ProtectedRoute
-          path="/admin/category/update/:id"
+          path="/admin/sellers"
           isAdmin={true}
-          component={UpdateCategory}
+          component={AllSellers}
+          exact
+        />
+
+        
+        <ProtectedRoute
+          path="/admin/seller/update/:id"
+          isAdmin={true}
+          component={UpdateSeller}
           exact
         />
 

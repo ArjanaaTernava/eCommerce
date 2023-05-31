@@ -27,8 +27,6 @@ const NewProduct = ({ history }) => {
   const { categories } = useSelector((state) => state.getCategories);
   const { sellers } = useSelector((state) => state.getSellers);
 
-  console.log(sellers);
-
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getSellers());
