@@ -1072,5 +1072,362 @@
         ]
       }
     }
+  },
+  "definitions": {
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "public_id": {
+                "type": "string",
+                "required": false
+              },
+              "url": {
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "shippingInfo": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "required": true
+            },
+            "city": {
+              "type": "string",
+              "required": true
+            },
+            "phoneNo": {
+              "type": "string",
+              "required": true
+            },
+            "postalCode": {
+              "type": "string",
+              "required": true
+            },
+            "country": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/User",
+          "required": true
+        },
+        "orderItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "quantity": {
+                "type": "number",
+                "required": true
+              },
+              "image": {
+                "type": "string",
+                "required": true
+              },
+              "price": {
+                "type": "number",
+                "required": true
+              },
+              "product": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        },
+        "paymentInfo": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          }
+        },
+        "paidAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "itemsPrice": {
+          "type": "number",
+          "required": true,
+          "default": 0.0
+        },
+        "taxPrice": {
+          "type": "number",
+          "required": true,
+          "default": 0.0
+        },
+        "shippingPrice": {
+          "type": "number",
+          "required": true,
+          "default": 0.0
+        },
+        "totalPrice": {
+          "type": "number",
+          "required": true,
+          "default": 0.0
+        },
+        "orderStatus": {
+          "type": "string",
+          "required": true,
+          "default": "Processing"
+        },
+        "deliveredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "price": {
+          "type": "number",
+          "required": true,
+          "maxLength": 5,
+          "default": 0.0
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "ratings": {
+          "type": "number",
+          "default": 0
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "public_id": {
+                "type": "string",
+                "required": false
+              },
+              "url": {
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category",
+          "default": null
+        },
+        "seller": {
+          "$ref": "#/definitions/Seller",
+          "default": null
+        },
+        "stock": {
+          "type": "number",
+          "required": true,
+          "maxLength": 5,
+          "default": 0
+        },
+        "numOfReviews": {
+          "type": "number",
+          "default": 0
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "$ref": "#/definitions/User",
+                "required": true
+              },
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "rating": {
+                "type": "number",
+                "required": true
+              },
+              "comment": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/User",
+          "required": false
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string",
+          "required": true
+        },
+        "answer": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Seller": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        }
+      }
+    },
+    "Support": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "trim": true
+        },
+        "email": {
+          "type": "string",
+          "trim": true
+        },
+        "question": {
+          "type": "string",
+          "trim": true
+        },
+        "isAdminOnly": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "maxLength": 30
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "format": "email"
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "minLength": 6
+        },
+        "avatar": {
+          "type": "object",
+          "properties": {
+            "public_id": {
+              "type": "string",
+              "required": false
+            },
+            "url": {
+              "type": "string",
+              "required": false
+            }
+          }
+        },
+        "role": {
+          "type": "string",
+          "default": "user"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "default": "2023-05-31T00:00:00.000Z"
+        },
+        "resetPasswordToken": {
+          "type": "string"
+        },
+        "resetPasswordExpire": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
+    }
   }
 }
