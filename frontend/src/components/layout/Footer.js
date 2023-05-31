@@ -120,6 +120,12 @@ const Footer = () => {
                     Support
                   </a>
                 </p>
+
+                <p>
+                  <a href="/qna" class="text-reset">
+                    Q&A
+                  </a>
+                </p>
                
               </div>
 
