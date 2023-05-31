@@ -1,7 +1,8 @@
 const swaggerAutogen = require("swagger-autogen")();
+const path = require("path");
 
 const outputFile = "./swagger_output.json";
-const endpointsFiles = ["../routes/endpoints"]; // Array of your endpoints files
+const endpointsFiles = [path.join(__dirname, "../routes/endpoints")]; // Array of your endpoints files
 
 const doc = {
   info: {
@@ -15,5 +16,37 @@ const doc = {
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
+  const swaggerDoc = require(outputFile);
+  addTagsToPaths(swaggerDoc);
   require("../app");
 });
+
+function addTagsToPaths(swaggerDoc) {
+  // console.log(Object.keys(swaggerDoc.paths));
+  for (const path in swaggerDoc.paths) {
+    const endpoint = swaggerDoc.paths[path];
+    for (const method in endpoint) {
+      const operation = endpoint[method];
+      console.log(operation);
+      for (value of getTagForEndpoint()) {
+        const emptyArr = [];
+        emptyArr.push(value);
+        operation.tags = emptyArr;
+        require("fs").writeFileSync(
+          "backend/utils/swagger_output.json",
+          JSON.stringify(swaggerDoc, null, 2)
+        );
+      }
+    }
+  }
+}
+
+function getTagForEndpoint() {
+  // console.log(path);
+  const swaggerDoc = require(outputFile);
+  const endpoints = Object.keys(swaggerDoc.paths);
+  const uniqueEndponts = Array.from(
+    new Set(endpoints.map((endpoint) => endpoint.split("/")[1]))
+  );
+  return uniqueEndponts;
+}
