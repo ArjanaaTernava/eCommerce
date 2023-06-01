@@ -7,12 +7,14 @@ const dotenv = require("dotenv");
 const connectDatabase = require("../config/database");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const QnA = require("../models/qna");
 
 const products = require("../data/product.json");
 const brands = require("../data/brands.json");
 const categories = require("../data/categories.json");
 const sellers = require("../data/sellers.json");
 const users = require("../data/users.json");
+const qna = require("../data/qna.json");
 
 // Setting dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -42,7 +44,17 @@ const seedBrands = async () => {
     console.log(error.message);
   }
 };
+const seedQnA = async () => {
+  try {
+    await QnA.deleteMany();
+    console.log("QnA are deleted");
 
+    await QnA.insertMany(qna);
+    console.log("All QnA are added.");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 const seedCategories = async () => {
   try {
     await Category.deleteMany();
@@ -149,6 +161,7 @@ const seedData = async () => {
   await seedProducts();
   await seedBrands();
   await seedUsers();
+  await seedQnA();
 };
 
 module.exports = {
@@ -158,4 +171,5 @@ module.exports = {
   seedSellers,
   seedData,
   seedUsers,
+  seedQnA,
 };

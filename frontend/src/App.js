@@ -12,6 +12,7 @@ import BrandDetails from "./components/brands/BrandDetails";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Support from "./components/layout/partials/Support";
+import QnAList from "./components/QnA/QnAList";
 
 // Cart Imports
 import Cart from "./components/cart/Cart";
@@ -60,7 +61,6 @@ import UpdateCategory from "./components/admin/UpdateCategory";
 import AllSellers from "./components/admin/AllSellers";
 import UpdateSeller from "./components/admin/UpdateSeller";
 
-
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -108,6 +108,7 @@ function App() {
           <Route path="/brands" component={Brands} exact />
           <Route path="/brands/:id" component={BrandDetails} />
           <Route path="/support" component={Support} />
+          <Route path="/qna" component={QnAList} />
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
@@ -210,7 +211,6 @@ function App() {
           exact
         />
 
-        
         <ProtectedRoute
           path="/admin/seller/update/:id"
           isAdmin={true}
