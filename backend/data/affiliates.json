@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Amazon",
+    "description": "Amazon is an online marketplace and cloud computing company.",
+    "website": "https://www.amazon.com",
+    "logo": "https://www.amazon.com/logo.png"
+  },
+  {
+    "name": "eBay",
+    "description": "eBay is a multinational e-commerce corporation.",
+    "website": "https://www.ebay.com",
+    "logo": "https://www.ebay.com/logo.png"
+  },
+  {
+    "name": "Target",
+    "description": "Target is a retail corporation.",
+    "website": "https://www.target.com",
+    "logo": "https://www.target.com/logo.png"
+  },
+  {
+    "name": "Walmart",
+    "description": "Walmart is a multinational retail corporation.",
+    "website": "https://www.walmart.com",
+    "logo": "https://www.walmart.com/logo.png"
+  }
+]
