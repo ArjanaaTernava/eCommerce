@@ -9,9 +9,10 @@ import ContactUs from "./components/layout/partials/ContactUs";
 import Careers from "./components/layout/partials/Careers";
 import Brands from "./components/brands/Brands";
 import BrandDetails from "./components/brands/BrandDetails";
-
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
+import Support from "./components/layout/partials/Support";
+import QnAList from "./components/QnA/QnAList";
 
 // Cart Imports
 import Cart from "./components/cart/Cart";
@@ -19,7 +20,6 @@ import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
 import OrderSuccess from "./components/cart/OrderSuccess";
-import Wishlist from "./components/cart/Wishlist";
 
 // Order Imports
 import ListOrders from "./components/order/ListOrders";
@@ -46,7 +46,6 @@ import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 import AllCategories from "./components/admin/AllCategories";
 
-
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import { useSelector } from "react-redux";
@@ -58,6 +57,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AddCategory from "./components/admin/Category";
 import AddSeller from "./components/admin/Seller";
+import UpdateCategory from "./components/admin/UpdateCategory";
+import AllSellers from "./components/admin/AllSellers";
+import UpdateSeller from "./components/admin/UpdateSeller";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -87,7 +89,6 @@ function App() {
           <Route path="/product/:id" component={ProductDetails} exact />
 
           <Route path="/cart" component={Cart} exact />
-          <Route path="/wishlist" component={Wishlist} exact />
           <ProtectedRoute path="/shipping" component={Shipping} />
           <ProtectedRoute path="/confirm" component={ConfirmOrder} exact />
           <ProtectedRoute path="/success" component={OrderSuccess} />
@@ -106,6 +107,8 @@ function App() {
           <Route path="/careers" component={Careers} />
           <Route path="/brands" component={Brands} exact />
           <Route path="/brands/:id" component={BrandDetails} />
+          <Route path="/support" component={Support} />
+          <Route path="/qna" component={QnAList} />
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
@@ -183,14 +186,35 @@ function App() {
         <ProtectedRoute
           path="/admin/categories"
           isAdmin={true}
-          component={AllCategories} // TODO: Change component for showing categories
+          component={AllCategories}
           exact
         />
-        
+
+        <ProtectedRoute
+          path="/admin/category/update/:id"
+          isAdmin={true}
+          component={UpdateCategory}
+          exact
+        />
+
         <ProtectedRoute
           path="/admin/seller/add"
           isAdmin={true}
           component={AddSeller}
+          exact
+        />
+
+        <ProtectedRoute
+          path="/admin/sellers"
+          isAdmin={true}
+          component={AllSellers}
+          exact
+        />
+
+        <ProtectedRoute
+          path="/admin/seller/update/:id"
+          isAdmin={true}
+          component={UpdateSeller}
           exact
         />
 

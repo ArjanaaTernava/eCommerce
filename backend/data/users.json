@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "password": "1234567890",
+        "avatar": {
+            "public_id": "avatars/be-your-telegram-group-admin_vpvhjf",
+            "url": "https://res.cloudinary.com/projekti/image/upload/v1685495749/avatars/be-your-telegram-group-admin_vpvhjf.jpg"
+        },
+        "role": "admin"
+    },
+    {
+        "name": "User",
+        "email": "user@gmail.com",
+        "password": "1234567890",
+        "avatar": {
+            "public_id": "avatars/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny_amn6lx",
+            "url": "https://res.cloudinary.com/projekti/image/upload/v1685489859/avatars/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny_amn6lx.png"
+        },
+        "role": "user"
+    }
+]

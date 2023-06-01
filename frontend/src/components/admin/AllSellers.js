@@ -9,24 +9,22 @@ import Loader from "../layout/Loader";
 
 import { useAlert } from "react-alert";
 import {
-  getCategories,
+  getSellers,
   clearErrors,
-  deleteCategory,
-} from "../../actions/categoryActions";
-import { DELETE_CATEGORY_RESET } from "../../constants/categoryConstants";
+  deleteSeller,
+} from "../../actions/sellerActions";
+import { DELETE_SELLER_RESET } from "../../constants/sellerConstants";
 
-const AllCategories = ({ history }) => {
+const AllSellers = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading, error, categories } = useSelector(
-    (state) => state.getCategories
-  );
+  const { loading, error, sellers } = useSelector((state) => state.getSellers);
   const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.category
+    (state) => state.seller
   );
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getSellers());
 
     if (error) {
       alert.error(error);
@@ -39,13 +37,13 @@ const AllCategories = ({ history }) => {
     }
 
     if (isDeleted) {
-      alert.success("Category deleted successfully!");
-      history.push("/admin/categories");
-      dispatch({ type: DELETE_CATEGORY_RESET });
+      alert.success("Seller deleted successfully!");
+      history.push("/admin/sellers");
+      dispatch({ type: DELETE_SELLER_RESET });
     }
   }, [dispatch, error, deleteError, isDeleted, history, alert]);
 
-  const setCategories = () => {
+  const setSellers = () => {
     const data = {
       columns: [
         {
@@ -67,14 +65,14 @@ const AllCategories = ({ history }) => {
       rows: [],
     };
 
-    categories.forEach((category) => {
+    sellers.forEach((seller) => {
       data.rows.push({
-        id: category._id,
-        name: category.name,
+        id: seller._id,
+        name: seller.name,
         actions: (
           <Fragment>
             <Link
-              to={`/admin/category/update/${category._id}`}
+              to={`/admin/seller/update/${seller._id}`}
               className="btn btn-primary py-1 px-2"
             >
               <i className="fa fa-pencil"></i>
@@ -82,7 +80,7 @@ const AllCategories = ({ history }) => {
 
             <button
               className="btn btn-danger py-1 px-2 ml-2"
-              onClick={() => deleteCategoryHandler(category._id)}
+              onClick={() => deleteCategoryHandler(seller._id)}
             >
               <i className="fa fa-trash"></i>
             </button>
@@ -95,25 +93,25 @@ const AllCategories = ({ history }) => {
   };
 
   const deleteCategoryHandler = (id) => {
-    dispatch(deleteCategory(id));
+    dispatch(deleteSeller(id));
   };
 
   return (
     <Fragment>
-      <MetaData title={"All Products"} />
+      <MetaData title={"All Sellers"} />
       <div className="row">
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Categories</h1>
+            <h1 className="my-5">All Sellers</h1>
 
             {loading ? (
               <Loader />
             ) : (
               <MDBDataTable
-                data={setCategories()}
+                data={setSellers()}
                 className="px-3"
                 bordered
                 striped
@@ -127,4 +125,4 @@ const AllCategories = ({ history }) => {
   );
 };
 
-export default AllCategories;
+export default AllSellers;

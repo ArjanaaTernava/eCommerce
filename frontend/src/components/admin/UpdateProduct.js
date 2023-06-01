@@ -11,6 +11,8 @@ import {
   clearErrors,
 } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import { getCategories } from "../../actions/categoryActions";
+import { getSellers } from "../../actions/sellerActions";
 
 const UpdateProduct = ({ match, history }) => {
   const [name, setName] = useState("");
@@ -24,25 +26,13 @@ const UpdateProduct = ({ match, history }) => {
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = [
-    "Electronics",
-    "Cameras",
-    "Laptops",
-    "Accessories",
-    "Headphones",
-    "Food",
-    "Books",
-    "Clothes/Shoes",
-    "Beauty/Health",
-    "Sports",
-    "Outdoor",
-    "Home",
-  ];
-
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const { error, product } = useSelector((state) => state.productDetails);
+  const { categories } = useSelector((state) => state.getCategories);
+  const { sellers } = useSelector((state) => state.getSellers);
+
   const {
     loading,
     error: updateError,
@@ -54,6 +44,8 @@ const UpdateProduct = ({ match, history }) => {
   useEffect(() => {
     if (product && product._id !== productId) {
       dispatch(getProductDetails(productId));
+      dispatch(getCategories());
+      dispatch(getSellers());
     } else {
       setName(product.name);
       setPrice(product.price);
@@ -189,8 +181,8 @@ const UpdateProduct = ({ match, history }) => {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
+                      <option key={category.name} value={category.name}>
+                        {category.name}
                       </option>
                     ))}
                   </select>
@@ -207,14 +199,19 @@ const UpdateProduct = ({ match, history }) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="seller_field">Seller Name</label>
-                  <input
-                    type="text"
-                    id="seller_field"
+                  <label htmlFor="seller_field">Seller</label>
+                  <select
                     className="form-control"
+                    id="seller_field"
                     value={seller}
                     onChange={(e) => setSeller(e.target.value)}
-                  />
+                  >
+                    {sellers.map((seller) => (
+                      <option key={seller.name} value={seller.name}>
+                        {seller.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="form-group">

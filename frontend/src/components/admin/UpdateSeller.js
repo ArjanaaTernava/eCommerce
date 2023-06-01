@@ -5,39 +5,65 @@ import Sidebar from "./Sidebar";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { newSeller, clearErrors } from "../../actions/sellerActions";
-import { NEW_SELLER_RESET } from "../../constants/sellerConstants";
+import {
+  clearErrors,
+  getSellerDetails,
+  updateSeller,
+} from "../../actions/sellerActions";
+import { UPDATE_SELLER_RESET } from "../../constants/sellerConstants";
 
-const AddSeller = ({ history }) => {
-  const [name, setName] = useState("");
-
+const UpdateSeller = ({ match, history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { error, success } = useSelector((state) => state.newSeller);
+  const { error, seller } = useSelector((state) => state.getSeller);
+  const [name, setName] = useState(seller.name);
+  const { error: updateError, isUpdated } = useSelector(
+    (state) => state.seller
+  );
+
+  const sellerId = match.params.id;
 
   useEffect(() => {
+    if (seller && seller._id !== sellerId) {
+      dispatch(getSellerDetails(sellerId));
+    } else {
+      setName(seller?.name);
+    }
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    if (success) {
-      history.push("/admin/sellers");
-      alert.success("Seller created successfully");
-      dispatch({ type: NEW_SELLER_RESET });
+
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, success, history]);
+
+    if (isUpdated) {
+      history.push("/admin/sellers");
+      alert.success("seller updated successfully");
+      dispatch({ type: UPDATE_SELLER_RESET });
+    }
+  }, [
+    dispatch,
+    alert,
+    error,
+    isUpdated,
+    history,
+    updateError,
+    seller,
+    sellerId,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.set("name", name);
 
-    dispatch(newSeller(formData));
-  };
-
-  const redirectToSellers = () => {
-    history.push("/admin/sellers");
+    dispatch(updateSeller(seller._id, formData));
   };
 
   return (
@@ -55,7 +81,7 @@ const AddSeller = ({ history }) => {
                 <form onSubmit={submitHandler}>
                   <div className="form-group">
                     <label htmlFor="sellerName_field">
-                      Enter Seller's Name
+                      Enter Seller Name
                     </label>
                     <input
                       type="text"
@@ -71,17 +97,7 @@ const AddSeller = ({ history }) => {
                     type="submit"
                     className="btn btn-primary btn-block py-2"
                   >
-                    ADD
-                  </button>
-
-                  <button
-                    id="search_button"
-                    type="submit"
-                    onClick={redirectToSellers}
-                    className="btn btn-primary btn-block py-2"
-                    style={{ marginTop: "10px" }}
-                  >
-                    VIEW ALL
+                    UPDATE
                   </button>
                 </form>
               </div>
@@ -92,5 +108,4 @@ const AddSeller = ({ history }) => {
     </Fragment>
   );
 };
-
-export default AddSeller;
+export default UpdateSeller;

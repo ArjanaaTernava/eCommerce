@@ -2,18 +2,17 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
-import { useHistory } from "react-router-dom";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newCategory, clearErrors } from "../../actions/categoryActions";
+import { NEW_CATEGORY_RESET } from "../../constants/categoryConstants";
 
-const AddCategory = () => {
+const AddCategory = ({ history }) => {
   const [name, setName] = useState("");
 
   const alert = useAlert();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { error, success } = useSelector((state) => state.newCategory);
 
@@ -22,7 +21,12 @@ const AddCategory = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, success]);
+    if (success) {
+      history.push("/admin/categories");
+      alert.success("Category created successfully");
+      dispatch({ type: NEW_CATEGORY_RESET });
+    }
+  }, [dispatch, alert, error, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,10 +37,9 @@ const AddCategory = () => {
   };
 
   const redirectToProducts = () => {
-    history.push("/admin/categories"); // Navigate to the specified path
+    history.push("/admin/categories");
   };
-  
-  console.log(submitHandler);
+
   return (
     <Fragment>
       <MetaData title={"Add Categories"} />
@@ -71,14 +74,16 @@ const AddCategory = () => {
                     ADD
                   </button>
                 </form>
-                
+
                 <button
-                    id="search_button"
-                    type="submit"
-                    onClick={redirectToProducts}
-                    className="btn btn-primary btn-block py-2">
-                    VIEW ALL
-                  </button>
+                  id="search_button"
+                  type="submit"
+                  onClick={redirectToProducts}
+                  className="btn btn-primary btn-block py-2"
+                  style={{ marginTop: "10px" }}
+                >
+                  VIEW ALL
+                </button>
               </div>
             </div>
           </Fragment>
