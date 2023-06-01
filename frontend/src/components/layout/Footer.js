@@ -1,9 +1,14 @@
 import { useGlobalContext } from "../../context";
-import React, { Fragment} from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-const Footer = () => {
+import { connect } from 'react-redux';
+import { fetchSocialMediaLinks } from '../../actions/socialmediaActions';
+const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
   const { footerYear } = useGlobalContext();
-  
+  useEffect(() => {
+    fetchSocialMediaLinks();
+  }, [fetchSocialMediaLinks]);
+
   return (
     <Fragment>
       <Link to={`/brands/`} className="card-link">
@@ -152,7 +157,7 @@ const Footer = () => {
       <ul className="navbar-nav d-flex align-items-center">
         <li className="nav-item d-flex align-items-center">
           Payment can be done through:
-          <a href="/payment">
+          <a href="/shipping">
           <img
             src="/images/payments_all.png"
             style={{ height: "50px" , marginRight:"300px"}}
@@ -163,31 +168,13 @@ const Footer = () => {
         </li>
 
         Social Media:
-        <li className="nav-item p-2">
-          <a href="/" className="me-4 text-black">
-            <i className="fa fa-facebook"></i>
-          </a>
-        </li>
-        <li className="nav-item p-2 ">
-          <a href="/" className="me-4 text-black">
-            <i className="fa fa-twitter"></i>
-          </a>
-        </li>
-        <li className="nav-item p-2">
-          <a href="/" className="me-4 text-black">
-            <i className="fa fa-google"></i>
-          </a>
-        </li>
-        <li className="nav-item p-2">
-          <a href="/" className="me-4 text-black">
-            <i className="fa fa-instagram"></i>
-          </a>
-        </li>
-        <li className="nav-item p-2">
-          <a href="/" className="me-4 text-black">
-            <i className="fa fa-linkedin"></i>
-          </a>
-        </li>
+        {socialMediaLinks.map((link) => (
+          <li key={link._id} className="nav-item p-2">
+            <a href={link.link} className="me-4 text-black">
+              <i className={`fa fa-${link.platform.toLowerCase()}`}></i>
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
         <p className="text-center mt-1">
@@ -198,4 +185,9 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+const mapStateToProps = (state) => ({
+  socialMediaLinks: state.socialMedia.socialMediaLinks,
+});
+
+export default connect(mapStateToProps, { fetchSocialMediaLinks })(Footer);
+

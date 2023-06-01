@@ -8,6 +8,7 @@ const connectDatabase = require("../config/database");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const QnA = require("../models/qna");
+const socialmedia = require("../models/socialmedia");
 
 const products = require("../data/product.json");
 const brands = require("../data/brands.json");
@@ -15,6 +16,7 @@ const categories = require("../data/categories.json");
 const sellers = require("../data/sellers.json");
 const users = require("../data/users.json");
 const qna = require("../data/qna.json");
+const sm = require("../data/socialmedia.json");
 
 // Setting dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -55,6 +57,19 @@ const seedQnA = async () => {
     console.log(error.message);
   }
 };
+
+const seedSM = async () => {
+  try {
+    await socialmedia.deleteMany();
+    console.log("socialmedia are deleted");
+
+    await socialmedia.insertMany(sm);
+    console.log("All socialmedia are added.");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const seedCategories = async () => {
   try {
     await Category.deleteMany();
@@ -162,6 +177,7 @@ const seedData = async () => {
   await seedBrands();
   await seedUsers();
   await seedQnA();
+  await seedSM();
 };
 
 module.exports = {
@@ -172,4 +188,5 @@ module.exports = {
   seedData,
   seedUsers,
   seedQnA,
+  seedSM,
 };

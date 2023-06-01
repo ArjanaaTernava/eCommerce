@@ -42,6 +42,8 @@ import {
 } from "./reducers/sellerReducers";
 import { supportReducer } from "./reducers/supportReducers";
 
+import { socialMediaReducer } from "./reducers/socialmediaReducers";
+
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
@@ -69,7 +71,8 @@ const reducer = combineReducers({
   getSellers: getSellersReducer,
   seller: sellerReducer,
   support: supportReducer,
-  getSeller:getSellerReducer
+  getSeller: getSellerReducer,
+  socialMedia: socialMediaReducer,
 });
 
 let initialState = {
