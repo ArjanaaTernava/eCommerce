@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Product from "../product/Product";
 import { Container, Nav, Navbar } from "react-bootstrap";
-//TO DO- Fix after reloading
+
 const NavigationBar = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const { loading, products } = useSelector((state) => state.products);
@@ -18,45 +18,43 @@ const NavigationBar = () => {
 
   return (
     <div>
-      <Navbar bg="light" className="navbartest">
-        <Container className="sticky-top navbartest">
-          <Nav className="navbartest">
-            <nav
-              className="navbartest"
-              style={{ backgroundColor: "white", display: "flex" }}
-            >
+      <Navbar bg="light" className="navbartest" expand="lg">
+        <Container className="sticky-top">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbartest"/>
+          <Navbar.Collapse id="basic-navbar-nav" className="navbartest">
+            <Nav className="mr-auto navbartest">
               <Link
                 to="/electronics"
                 onClick={() => handleCategoryClick("Electronics")}
-                className="nav-link"
+                className="nav-link mr-2"
               >
                 Electronics
               </Link>
               <Link
                 to="/laptops"
                 onClick={() => handleCategoryClick("Laptops")}
-                className="nav-link"
+                className="nav-link mr-2"
               >
                 Laptops
               </Link>
               <Link
                 to="/accessories"
                 onClick={() => handleCategoryClick("Accessories")}
-                className="nav-link"
+                className="nav-link mr-2"
               >
                 Accessories
               </Link>
               <Link
                 to="/cameras"
                 onClick={() => handleCategoryClick("Cameras")}
-                className="nav-link"
+                className="nav-link mr-2"
               >
                 Cameras
               </Link>
               <Link
                 to="/foods"
                 onClick={() => handleCategoryClick("Foods")}
-                className="nav-link"
+                className="nav-link mr-2"
               >
                 Foods
               </Link>
@@ -67,8 +65,8 @@ const NavigationBar = () => {
               >
                 Headphones
               </Link>
-            </nav>
-          </Nav>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
       <Container>
