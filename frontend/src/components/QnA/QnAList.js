@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import QnACard from "./QnACard";
 
 const QnAList = () => {
-  const [qnaEntries, setQnaEntries] = useState([]);
+  const [qnaList, setQnaList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchQnAEntries = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get("/api/v1/qna");
-        setQnaEntries(response.data.qna);
+        setQnaList(response.data.qna);
         setLoading(false);
       } catch (error) {
-        setError("Error fetching QnA entries");
+        setError(error.message);
         setLoading(false);
       }
     };
 
-    fetchQnAEntries();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -32,12 +31,13 @@ const QnAList = () => {
 
   return (
     <div className="card-container">
-      {qnaEntries.slice(0, 6).map((entry) => (
-        <QnACard
-          key={entry._id}
-          question={entry.question}
-          answer={entry.answer}
-        />
+      {qnaList.map((entry) => (
+        <div className="card" key={entry._id}>
+          <div className="card-body">
+            <h5 className="card-title">Q: {entry.question}</h5>
+            <p className="card-text">A: {entry.answer}</p>
+          </div>
+        </div>
       ))}
     </div>
   );
