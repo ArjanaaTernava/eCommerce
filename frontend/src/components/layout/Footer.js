@@ -1,18 +1,26 @@
 import { useGlobalContext } from "../../context";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect} from "react";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import { fetchSocialMediaLinks } from '../../actions/socialmediaActions';
-const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
+import { connect } from "react-redux";
+import { fetchSocialMediaLinks } from "../../actions/socialmediaActions";
+import { fetchAffiliateLinks } from "../../actions/affiliateActions";
+
+const Footer = ({
+  socialMediaLinks,
+  fetchSocialMediaLinks,
+  affiliateLinks,
+  fetchAffiliateLinks
+}) => {
   const { footerYear } = useGlobalContext();
   useEffect(() => {
     fetchSocialMediaLinks();
-  }, [fetchSocialMediaLinks]);
+    fetchAffiliateLinks();
+  }, [fetchSocialMediaLinks,fetchAffiliateLinks]);
 
   return (
     <Fragment>
       <Link to={`/brands/`} className="card-link">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav navbaricons">
             <li className="nav-item ">
               <img
@@ -63,8 +71,8 @@ const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
               />
             </li>
           </ul>
-      </nav>
-    </Link>
+        </nav>
+      </Link>
       <footer className="py-1">
         <section class="">
           <div class="container text-center text-md-start mt-5">
@@ -74,32 +82,26 @@ const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
                   <i class="fa fa-gem me-3"></i>eBlej
                 </h6>
                 <p>
-                Shopping with us is not just about buying products; it's about being part of a community. 
+                  Shopping with us is not just about buying products; it's about
+                  being part of a community.
                 </p>
               </div>
 
               <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4">Products</h6>
-                <p>
-                  <a href="#!" class="text-reset">
-                    Angular
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" class="text-reset">
-                    React
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" class="text-reset">
-                    Vue
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" class="text-reset">
-                    Laravel
-                  </a>
-                </p>
+                <h6 class="text-uppercase fw-bold mb-4">Affiliates</h6>
+                <div className="affiliate-list">
+                {affiliateLinks.length > 0 ? (
+                    affiliateLinks.map((affiliate) => (
+                      <p key={affiliate._id}>
+                        <a href={affiliate.website} className="text-reset">
+                          {affiliate.name}
+                        </a>
+                      </p>
+                    ))
+                  ) : (
+                    <p>No affiliates available.</p>
+                  )}
+                </div>
               </div>
 
               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -131,7 +133,6 @@ const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
                     Q&A
                   </a>
                 </p>
-               
               </div>
 
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -154,29 +155,28 @@ const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
           </div>
         </section>
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbarpayment">
-      <ul className="navbar-nav d-flex align-items-center">
-        <li className="nav-item d-flex align-items-center">
-          Payment can be done through:
-          <a href="/shipping">
-          <img
-            src="/images/payments_all.png"
-            style={{ height: "50px" , marginRight:"300px"}}
-            alt="Brand Logo 1"
-            className="nav-link"
-          />
-          </a>
-        </li>
-
-        Social Media:
-        {socialMediaLinks.map((link) => (
-          <li key={link._id} className="nav-item p-2">
-            <a href={link.link} className="me-4 text-black">
-              <i className={`fa fa-${link.platform.toLowerCase()}`}></i>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+          <ul className="navbar-nav d-flex align-items-center">
+            <li className="nav-item d-flex align-items-center">
+              Payment can be done through:
+              <a href="/shipping">
+                <img
+                  src="/images/payments_all.png"
+                  style={{ height: "50px", marginRight: "300px" }}
+                  alt="Brand Logo 1"
+                  className="nav-link"
+                />
+              </a>
+            </li>
+            Social Media:
+            {socialMediaLinks.map((link) => (
+              <li key={link._id} className="nav-item p-2">
+                <a href={link.link} className="me-4 text-black">
+                  <i className={`fa fa-${link.platform.toLowerCase()}`}></i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <p className="text-center mt-1">
           eBlej - {footerYear}, All Rights Reserved
         </p>
@@ -187,7 +187,10 @@ const Footer = ({socialMediaLinks, fetchSocialMediaLinks }) => {
 
 const mapStateToProps = (state) => ({
   socialMediaLinks: state.socialMedia.socialMediaLinks,
+  affiliateLinks:state.affiliate.affiliateLinks
 });
 
-export default connect(mapStateToProps, { fetchSocialMediaLinks })(Footer);
-
+export default connect(mapStateToProps, {
+  fetchSocialMediaLinks,
+  fetchAffiliateLinks
+})(Footer);

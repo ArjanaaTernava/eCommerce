@@ -28,7 +28,7 @@ const sellers = require("./routes/seller");
 const support = require("./routes/support");
 const qna = require("./routes/qna");
 const socialmedia = require("./routes/socialmedia");
-
+const affiliate = require("./routes/affiliate");
 
 app.use("/api/v1", products);
 app.use("/api/v1", auth);
@@ -40,6 +40,7 @@ app.use("/api/v1", sellers);
 app.use("/api/v1", support);
 app.use("/api/v1", qna);
 app.use("/api/v1", socialmedia);
+app.use("/api/v1", affiliate);
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
