@@ -1,25 +1,21 @@
 import { useGlobalContext } from "../../context";
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import React, { Fragment, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSocialMediaLinks } from "../../actions/socialmediaActions";
 import { fetchAffiliateLinks } from "../../actions/affiliateActions";
+
 const Footer = ({
   socialMediaLinks,
   fetchSocialMediaLinks,
   affiliateLinks,
-  fetchAffiliateLinks,
+  fetchAffiliateLinks
 }) => {
   const { footerYear } = useGlobalContext();
   useEffect(() => {
     fetchSocialMediaLinks();
-  }, [fetchSocialMediaLinks]);
-
-  useEffect(() => {
     fetchAffiliateLinks();
-  }, [fetchAffiliateLinks]);
+  }, [fetchSocialMediaLinks,fetchAffiliateLinks]);
 
   return (
     <Fragment>
@@ -94,7 +90,7 @@ const Footer = ({
               <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">Affiliates</h6>
                 <div className="affiliate-list">
-                  {affiliateLinks.length > 0 ? (
+                {affiliateLinks.length > 0 ? (
                     affiliateLinks.map((affiliate) => (
                       <p key={affiliate._id}>
                         <a href={affiliate.website} className="text-reset">
@@ -191,10 +187,10 @@ const Footer = ({
 
 const mapStateToProps = (state) => ({
   socialMediaLinks: state.socialMedia.socialMediaLinks,
-  affiliateLinks: state.affiliates.affiliateLinks,
+  affiliateLinks:state.affiliate.affiliateLinks
 });
 
 export default connect(mapStateToProps, {
   fetchSocialMediaLinks,
-  fetchAffiliateLinks,
+  fetchAffiliateLinks
 })(Footer);
