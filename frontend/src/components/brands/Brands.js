@@ -31,7 +31,7 @@ const Brands = () => {
     return <div>Error: {error}</div>;
   }
   return (
-    <div style={{ height: "110vh", display: "flex", flexDirection: "column" , paddingBottom: "50px;" }}>
+    <div style={{  display: "flex", flexDirection: "column" , paddingBottom: "50px;" }}>
       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Brands</h2>
       <div
         className="row"
