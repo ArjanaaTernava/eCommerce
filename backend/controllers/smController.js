@@ -1,4 +1,3 @@
-// socialMediaController.js
 const SocialMedia = require('../models/socialmedia');
 
 // GET all social media links

@@ -1,5 +1,5 @@
 // reducers/socialMediaReducer.js
-import { FETCH_SOCIAL_MEDIA_LINKS } from '../constants/socialmediaConstants';
+import { FETCH_SOCIAL_MEDIA_LINKS } from "../constants/socialmediaConstants";
 
 const initialState = {
   socialMediaLinks: [],
@@ -16,4 +16,3 @@ export const socialMediaReducer = (state = initialState, action) => {
       return state;
   }
 };
-

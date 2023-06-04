@@ -1,16 +1,4 @@
-
 const AboutUs = () => {
-  //   useEffect(() => {
-  //     const script = document.createElement('script');
-  //     script.src = 'public/javascripts/map.js';
-  //     script.async = true;
-  //     document.body.appendChild(script);
-
-  //     return () => {
-  //       document.body.removeChild(script);
-  //     };
-  //   }, []);
-
   return (
     <>
       <div className="container">

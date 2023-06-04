@@ -1,9 +1,8 @@
 const Seller = require("../models/seller");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
-const APIFeatures = require("../utils/apiFeatures");
 
-exports.createSeller = catchAsyncErrors(async (req, res, next) => {
+exports.createSeller = catchAsyncErrors(async (req, res) => {
   const { name } = req.body;
 
   const seller = await Seller.create({ name });
@@ -13,7 +12,7 @@ exports.createSeller = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.getSellers = catchAsyncErrors(async (req, res, next) => {
+exports.getSellers = catchAsyncErrors(async (req, res) => {
   const sellers = await Seller.find();
 
   res.status(200).json({
@@ -22,7 +21,7 @@ exports.getSellers = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.getSellerById = catchAsyncErrors(async (req, res, next) => {
+exports.getSellerById = catchAsyncErrors(async (req, res) => {
   const seller = await Seller.findById(req.params.id);
 
   res.status(200).json({

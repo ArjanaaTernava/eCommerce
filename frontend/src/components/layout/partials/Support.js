@@ -16,7 +16,6 @@ const Support = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log("Submitting question:", name, email, question); // per me testu a po mirren vlerat prej formes
 
     dispatch(submitQuestion(name, email, question));
 
@@ -27,8 +26,8 @@ const Support = () => {
   };
 
   const divStyle = {
-    marginBottom: 25
-  }
+    marginBottom: 25,
+  };
 
   return (
     <div className="support-form-container" style={divStyle}>
