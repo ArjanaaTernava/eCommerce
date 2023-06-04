@@ -2,7 +2,7 @@
 const SocialMedia = require('../models/socialmedia');
 
 // GET all social media links
-const getAllSocialMediaLinks = async (req, res) => {
+exports.getAllSocialMediaLinks = async (req, res) => {
   try {
     const socialMediaLinks = await SocialMedia.find();
     res.json(socialMediaLinks);
@@ -12,7 +12,7 @@ const getAllSocialMediaLinks = async (req, res) => {
 };
 
 // GET a single social media link by ID
-const getSocialMediaLinkById = async (req, res) => {
+exports.getSocialMediaLinkById = async (req, res) => {
   try {
     const socialMediaLink = await SocialMedia.findById(req.params.id);
     if (!socialMediaLink) {
@@ -25,7 +25,7 @@ const getSocialMediaLinkById = async (req, res) => {
 };
 
 // POST a new social media link
-const createSocialMediaLink = async (req, res) => {
+exports.createSocialMediaLink = async (req, res) => {
   try {
     const socialMediaLink = await SocialMedia.create(req.body);
     res.status(201).json(socialMediaLink);
@@ -35,7 +35,7 @@ const createSocialMediaLink = async (req, res) => {
 };
 
 // PUT (update) an existing social media link
-const updateSocialMediaLink = async (req, res) => {
+exports.updateSocialMediaLink = async (req, res) => {
   try {
     const socialMediaLink = await SocialMedia.findByIdAndUpdate(
       req.params.id,
@@ -52,7 +52,7 @@ const updateSocialMediaLink = async (req, res) => {
 };
 
 // DELETE a social media link
-const deleteSocialMediaLink = async (req, res) => {
+exports.deleteSocialMediaLink = async (req, res) => {
   try {
     const socialMediaLink = await SocialMedia.findByIdAndDelete(req.params.id);
     if (!socialMediaLink) {
@@ -62,12 +62,4 @@ const deleteSocialMediaLink = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'An error occurred' });
   }
-};
-
-module.exports = {
-  getAllSocialMediaLinks,
-  getSocialMediaLinkById,
-  createSocialMediaLink,
-  updateSocialMediaLink,
-  deleteSocialMediaLink,
 };
