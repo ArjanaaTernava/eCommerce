@@ -9,18 +9,18 @@ const {
 } = require("../controllers/affiliateController");
 
 // Create a new affiliate
-router.post("/affiliates", createAffiliate);
+router.route("/affiliates").post(createAffiliate);
 
 // Get all affiliates
-router.get("/affiliates", getAllAffiliates);
+router.route("/affiliates").get(getAllAffiliates);
 
 // Get a single affiliate by ID
-router.get("/affiliates/:id", getAffiliateById);
+router.route("/affiliates/:id").get(getAffiliateById);
 
 // Update an affiliate
-router.put("/affiliates/:id", updateAffiliate);
+router.route("/affiliates/:id").put(updateAffiliate);
 
 // Delete an affiliate
-router.delete("/affiliates/:id", deleteAffiliate);
+router.route("/affiliates/:id").delete(deleteAffiliate);
 
 module.exports = router;

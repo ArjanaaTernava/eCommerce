@@ -2,6 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  createAffiliate,
+  getAllAffiliates,
+  getAffiliateById,
+  updateAffiliate,
+  deleteAffiliate,
+} = require("../controllers/affiliateController");
+
+const {
   getBrands,
   getBrandById,
   createBrand,
@@ -71,6 +79,14 @@ const {
 } = require("../controllers/sellerController");
 
 const { submitQuestion } = require("../controllers/supportController");
+
+const {
+  createSocialMediaLink,
+  deleteSocialMediaLink,
+  getAllSocialMediaLinks,
+  getSocialMediaLinkById,
+  updateSocialMediaLink,
+} = require("../controllers/smController");
 
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
@@ -147,5 +163,18 @@ router.route("/admin/sellers").get(isAuthenticatedUser, getSellers);
 router.route("/admin/seller/:id").get(isAuthenticatedUser, getSellerById);
 
 router.route("/support").post(submitQuestion);
+
+router.route("/affiliates").post(createAffiliate);
+router.route("/affiliates").get(getAllAffiliates);
+router.route("/affiliates/:id").get(getAffiliateById);
+router.route("/affiliates/:id").put(updateAffiliate);
+router.route("/affiliates/:id").delete(deleteAffiliate);
+
+router.route("/socialmedia").get(getAllSocialMediaLinks);
+router.route("/socialmedia/:id").get(getSocialMediaLinkById);
+router.route("/socialmedia").post(createSocialMediaLink);
+router.route("/socialmedia/:id").put(updateSocialMediaLink);
+router.route("/socialmedia/:id").delete(deleteSocialMediaLink);
+
 
 module.exports = router;
