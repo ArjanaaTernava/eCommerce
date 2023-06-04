@@ -12,7 +12,7 @@ import BrandDetails from "./components/brands/BrandDetails";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Support from "./components/layout/partials/Support";
-import QnAList from "./components/QnA/QnAList";
+import QnAList from "./components/q&a/QnAList";
 
 // Cart Imports
 import Cart from "./components/cart/Cart";
@@ -60,6 +60,12 @@ import AddSeller from "./components/admin/Seller";
 import UpdateCategory from "./components/admin/UpdateCategory";
 import AllSellers from "./components/admin/AllSellers";
 import UpdateSeller from "./components/admin/UpdateSeller";
+import Electronics from "./components/categories/Electronics";
+import Laptops from "./components/categories/Laptops";
+import Foods from "./components/categories/Foods";
+import Cameras from "./components/categories/Cameras";
+import Accessories from "./components/categories/Accessories";
+import Headphones from "./components/categories/Headphones";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -109,6 +115,13 @@ function App() {
           <Route path="/brands/:id" component={BrandDetails} />
           <Route path="/support" component={Support} />
           <Route path="/qna" component={QnAList} />
+          <Route path="/electronics" component={Electronics}/>
+          <Route path="/laptops" component={Laptops}/>
+          <Route path="/foods" component={Foods}/>
+          <Route path="/cameras" component={Cameras}/>
+          <Route path="/accessories" component={Accessories}/>
+          <Route path="/headphones" component={Headphones}/>
+
 
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />

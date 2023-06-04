@@ -4,8 +4,6 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const errorMiddleware = require("./middlewares/errors");
-// const dotenv = require('dotenv');
-const path = require("path");
 
 // Setting up config file
 if (process.env.NODE_ENV !== "PRODUCTION")
@@ -41,14 +39,6 @@ app.use("/api/v1", support);
 app.use("/api/v1", qna);
 app.use("/api/v1", socialmedia);
 app.use("/api/v1", affiliate);
-
-if (process.env.NODE_ENV === "PRODUCTION") {
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-  });
-}
 
 // Middleware to handle errors
 app.use(errorMiddleware);
