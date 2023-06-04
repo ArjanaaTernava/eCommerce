@@ -30,7 +30,7 @@ const QnAList = () => {
   }
 
   return (
-    <div className="card-container">
+    <div className="card-container" style={{marginBottom:"20px",marginTop:"20px"}}>
       {qnaList.map((entry) => (
         <div className="card" key={entry._id}>
           <div className="card-body">
@@ -40,6 +40,7 @@ const QnAList = () => {
         </div>
       ))}
     </div>
+    
   );
 };
 
