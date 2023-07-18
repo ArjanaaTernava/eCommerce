@@ -35,7 +35,7 @@
     "express-fileupload": "^1.2.0",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.16",
+    "mongoose": "^5.13.20",
     "nodemailer": "^6.4.16",
     "stripe": "^8.128.0",
     "swagger-autogen": "^2.23.1",
